@@ -1,0 +1,759 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    direction: rtl;
+    font-family: Yekan;
+    font-size: 15px;
+    color: #666;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #eeeeee;
+    height: 100%;
+}
+
+.transition-effect {
+    transition: .5s;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.container-fluid {
+    width: 100%;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.row:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0 2%;
+}
+
+.form-group-half {
+    width: 50%;
+    float: right;
+    margin-bottom: 10px;
+    padding: 0 2%;
+}
+
+.form-group-third {
+    width: 33.3333%;
+    float: right;
+    margin-bottom: 10px;
+    padding: 0 2%;
+}
+
+.form-group-fourth {
+    width: 25%;
+    float: right;
+    margin-bottom: 10px;
+    padding: 0 2%;
+}
+
+.img-responsive {
+    max-width: 100%;
+    display: block;
+}
+
+.loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #717171;
+    opacity: .8;
+    z-index: 9999;
+    text-align: center;
+    display: none;
+}
+
+.loading img {
+    max-width: 100%;
+    margin: 350px 0;
+}
+
+@font-face {
+    font-family: Yekan;
+    src: url(../fonts/Yekan.woff);
+}
+
+@font-face {
+    font-family: LatoMedium;
+    src: url(../fonts/LatoMedium.ttf);
+}
+
+/*======== let's begin (entry-page) ========*/
+
+.entry-bg {
+    background: url(../images/entry-bg.jpg) no-repeat fixed;
+    background-size: cover;
+    padding-top: 10%;
+}
+
+.entry-box {
+    max-width: 385px;
+    margin: 0 auto;
+    background: url(../images/box-bg.png) repeat;
+}
+
+.entry-box header {
+    padding: 5px 15px;
+    color: #fff;
+    background-color: #004c94;
+    position: relative;
+}
+
+.entry-box form {
+    padding: 10px;
+}
+
+.entry-box form label {
+    margin-right: 5px;
+    color: #fff;
+}
+
+.entry-box form input[type='text'] {
+    width: 100%;
+    line-height: 35px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;  
+    box-shadow: inset 0 3px 8px #d8d8d8;
+    text-align: center;
+}
+
+.entry-box form input[type='text']:focus {
+    border-color: #43a047;
+}
+
+.entry-box form input[type='text']::-webkit-input-placeholder {
+    text-align: right;
+    font-size: 11px;
+}
+
+.captcha {
+    height: 60px;
+    border: 1px solid #c7c7c7;
+    background: url(../images/captcha-bg.png) repeat;
+}
+
+#public-login-btn {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    line-height: 35px;
+    background-color: #43a047;
+    color: #fff;
+}
+
+#public-login-btn:hover {
+    background-color: #2e7d32;
+}
+
+#member-login-btn {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    line-height: 35px;
+    background-color: #43a047;
+    color: #fff;
+}
+
+#member-login-btn:hover {
+    background-color: #2e7d32;
+}
+
+#public-login-auth-btn {
+    color: #fff;
+}
+
+#member-login-auth-btn {
+    color: #fff;
+}
+
+.location-icon {
+    width: 30px;
+    float: left;
+    cursor: pointer;
+}
+
+.address {
+    font-size: 11px;
+    text-align: center;
+    border-top: 1px solid #fff;
+    color: #fff;
+}
+
+
+/*======== let's begin (result-page) ========*/
+
+.main-header-box {
+    width: 100%;
+    height: 100px;
+}
+
+.main-header {
+    height: 100px;
+    background: url(../images/main-header-bg.png);
+    display: none;
+}
+
+.mohajeri-logo {
+    max-width: 284px;
+    margin: 5px 50px;
+}
+
+.search-box {
+    width: 950px;
+    box-sizing: border-box;
+    padding: 2% 5%;
+    float: right;
+}
+
+.image-cover {
+    background: url(../images/entry-bg.jpg) top;
+    background-size: cover;
+}
+
+.search-box ul {
+    list-style: none;
+}
+
+.search-box ul li {
+    display: inline-block;
+    padding: 12px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.search-box ul li.active {
+    background: url(../images/box-bg.png) repeat;
+    color: #f79420;
+}
+
+.search-form {
+    padding: 10px;
+    background: url(../images/box-bg.png) repeat;
+}
+
+.search-form  label {
+    color: #fff;
+}
+
+.search-form input[type='radio'] {
+    margin-left: 20px;
+}
+
+.search-form input[type='text'] {
+    width: 100%;
+    line-height: 35px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;  
+    box-shadow: inset 0 3px 8px #d8d8d8;
+    text-align: right;
+}
+
+.search-form input[type='text']:focus {
+    border-color: #43a047;
+}
+
+.search-form select:focus {
+    border-color: #43a047;
+}
+
+select option {
+    margin-top: 10px !important;
+}
+
+.search-form select {
+    width: 100%;
+    height: 37px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;  
+    box-shadow: inset 0 3px 8px #d8d8d8;
+    text-align: right;
+}
+
+.search-form a {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    height: 35px;
+    margin-top: 10px;
+    line-height: 35px;
+    background-color: #43a047;
+    color: #fff;
+}
+
+.search-form a:hover {
+    background-color: #2e7d32;
+}
+
+.result-show {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.result-show header {
+    width: 100%;
+    height: 50px;
+    padding-right: 20px;
+    line-height: 50px;
+    color: #fff;
+    background-color: #004c94;
+}
+
+.result-show table {
+    width: 100%;
+    border: 1px solid #d7d7d7;
+    text-align: center;
+    border-spacing: 0;
+}
+
+.result-show table tr:nth-last-of-type(even) {
+    background-color: #d7d7d7
+}
+
+.charter-result-submit {
+    background-color: transparent;
+    cursor: pointer;
+    color: #0a9400;
+}
+
+.liaison-result-submit {
+    background-color: transparent;
+    cursor: pointer;
+    color: #0a9400;
+}
+
+.accordion {
+    cursor: pointer;
+}
+
+.tour {
+    margin-top: 20px;
+}
+
+.tour ul {
+    list-style: none;
+    text-align: center;
+}
+
+.tour ul li {
+    width: 15%;
+    margin: 0 4% 20px 4%;
+    padding: 1%;
+    display: inline-block;
+}
+
+.tour ul li img {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0px 20px #585858;
+    opacity: .8;
+    transition: 2s;
+}
+
+.tour ul li img:hover {
+    opacity: 1;
+    transition: 1s;
+}
+
+.tour ul li a {
+    text-decoration: none;
+}
+
+.main-footer {
+    width: 100%;
+    line-height: 40px;
+    background-color: #004c94;
+    color: #fff;
+    text-align: center;
+    font-size: 11px;
+}
+
+/*======== let's begin (reserve-page) ========*/
+
+.reserve-summery {
+    width: 30%;
+    float: right;
+    box-sizing: border-box;
+    padding: 2% 5% 2% 2%;
+}
+
+.reserve-summery header {
+    background-color: #004c94;
+    color: #fff;
+    padding: 5px 20px;
+}
+
+.reserve-summery ul {
+    list-style: none;
+    padding: 14px 30px 10px 10px;
+    box-sizing: border-box;
+    background: url(../images/box-bg.png) repeat;
+}
+
+.reserve-summery ul li {
+    color: #fff;
+}
+
+.reserve-btn {
+    display: block;
+    width: 100%;
+    height: 37px; 
+    margin-top: 30px;
+    background-color: #43a047;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+.reserve-btn:hover {
+    background-color: #2e7d32;
+}
+
+.passenger-info {
+    width: 70%;
+    float: right;
+    box-sizing: border-box;
+    padding: 2% 2% 2% 5%;
+}
+
+.passenger-info > header {
+    color: #fff;
+    background-color: #004c94;
+    padding: 5px 20px;
+}
+
+.people-header {
+    background: linear-gradient(to left, #004c94, transparent, transparent);
+    color: #fff;
+    padding: 5px 20px;
+    margin: 10px 0;
+}
+
+.passenger-form {
+    width: 100%;
+    padding: 10px;
+    background: url(../images/box-bg.png) repeat;
+}
+
+.passenger-form label{
+    width: 100%;
+    display: block;
+    color: #fff;
+}
+
+.passenger-form input {
+    width: 100%;
+    line-height: 35px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;
+    box-shadow: inset 0 3px 8px #d8d8d8;
+    text-align: right;
+}
+
+.passenger-form input[type="submit"] {
+    text-align: center;
+    background-color: #0a9400;
+    border-color: #2e7d32;
+    box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.passenger-form select {
+    width: 100%;
+    height: 37px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;
+    box-shadow: inset 0 3px 8px #d8d8d8;
+    text-align: right;
+}
+
+.passenger-number {
+    list-style: none;
+}
+
+.passenger-number li {
+    border-bottom: 1px dotted #fff;
+}
+
+.passenger-number li:last-child {
+    border-bottom: none;
+}
+
+.passenger-extra-info {
+    width: 100%;
+}
+
+.payment {
+    width: 100%;
+    height: 400px;
+    background-color: #eee;
+}
+
+.payment header {
+    padding: 20px;
+    text-align: center;
+    color: red;
+    font-size: 20px;
+}
+
+.payment ul {
+    list-style: none;
+    text-align: center;
+}
+
+.payment ul li {
+    display: inline-block;
+}
+
+.payment ul li img {
+    width: 300px;
+}
+
+.credit-form {
+    max-width: 450px;
+    background: url(../images/box-bg.png) repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.credit-form header {
+    background-color: #004c94;
+    color: #fff;
+    padding: 5px 15px;
+}
+
+.credit-form input {
+    width: 100%;
+}
+
+.credit-form label {
+    color: #fff;
+}
+
+.credit-form input[type="submit"] {
+    background-color: #43a047;
+    cursor: pointer;
+    color: #fff;
+    margin-top: 30px;
+}
+
+.credit-form input[type="submit"]:hover {
+    background-color: #2e7d32;
+}
+
+@media screen and (max-width: 992px) {
+
+    .form-group {
+        width: 100%; 
+        padding: 0;
+    }
+
+    .form-group-half {
+        width: 100%;
+        padding: 0;
+    }
+
+    .form-group-third {
+        width: 100%;
+        padding: 0;
+    }
+
+    .form-group-fourth {
+        width: 100%;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .entry-box {
+        margin: 50px auto 0 auto;
+    }
+
+    .search-box {
+        padding: 0;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .agency-filter {
+        width: 100%;
+        padding: 0;
+    }
+
+    .result-show {
+        padding: 20px 0;
+    }
+
+    .tour ul li {
+        width: 30%;
+        margin-top: 20px;
+        padding: 1%;
+        display: inline-block;
+    }
+
+    .tour ul li img {
+        opacity: 1;
+    }
+
+    .reserve-summery {
+        width: 100%;
+        padding: 0;
+    }
+
+    .passenger-info {
+        width: 100%;
+        padding: 0;
+        margin-top: 20px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .mohajeri-logo {
+        margin: 5px 5px 5px 0;
+    }
+
+    .search-box ul li {
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .result-show thead {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .result-show table, thead, tbody, tr, th, td {
+        display: block;
+    }
+
+    .result-show table td:before {
+        float: right;
+        text-align: right;
+        padding-right: 5px;
+        width: 100px;
+    }
+
+    .result-show table td {
+        border-bottom: 1px solid #d7d7d7;
+    }
+
+    .result-show thead {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .result-show table, thead, tbody, tr, th, td {
+        display: block;
+    }
+
+    .result-show table td {
+        text-align: center;
+    }
+
+    .result-show table td:before {
+        float: right;
+        text-align: right;
+        padding-right: 5px;
+        width: 100px;
+    }
+
+    .result-show table td:nth-last-of-type(12):before {
+        content: 'انتخاب';
+    }
+
+    .result-show table td:nth-last-of-type(11):before {
+        content: 'ردیف';
+    }
+
+    .result-show table td:nth-last-of-type(10):before {
+        content: 'مقصد';
+    }
+
+    .result-show table td:nth-last-of-type(9):before {
+        content: 'مبدا';
+    }
+
+    .result-show table td:nth-last-of-type(8):before {
+        content: 'ایرلاین';
+    }
+
+    .result-show table td:nth-last-of-type(7):before {
+        content: 'شماره پرواز';
+    }
+
+    .result-show table td:nth-last-of-type(6):before {
+        content: 'ساعت حرکت';
+    }
+
+    .result-show table td:nth-last-of-type(5):before {
+        content: 'ساعت فرود';
+    }
+
+    .result-show table td:nth-last-of-type(4):before {
+        content: 'ظرفیت';
+    }
+
+    .result-show table td:nth-last-of-type(3):before {
+        content: 'کلاس نرخی';
+    }
+
+    .result-show table td:nth-last-of-type(2):before {
+        content: 'قیمت';
+    }
+
+    .result-show table td:nth-last-of-type(1):before {
+        content: '.';
+    }
+
+    .result-show table td {
+        border-bottom: 1px solid #959595;
+    }
+
+    .tour ul li {
+        width: 50%;
+        margin-top: 20px;
+        padding: 1%;
+        display: inline-block;
+    }
+
+    .tour ul li img {
+        opacity: 1;
+    }
+
+}
