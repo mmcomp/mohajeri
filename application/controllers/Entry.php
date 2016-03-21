@@ -7,6 +7,7 @@ class Entry extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('city_model');
+        $_SESSION['refrence_id'] = NULL;
     }
 
     public function index() {
