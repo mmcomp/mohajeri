@@ -31,17 +31,20 @@
                         $i = count($flight_info) - 1;
                         foreach ($flight_info as $row) {
                             ?>
-                            <li><?php echo $row[$i]['to_city']; ?> - <?php echo $row[$i]['from_city']; ?></li>
-                            <li><?php echo $row[$i]['fdate']; ?></li>
-                            <li><?php echo $row[$i]['class_ghimat']; ?></li>
-                            <li><?php echo $row[$i]['price']; ?></li>
+                            <li><?php echo $row[$i]['to_city']; ?> به <?php echo $row[$i]['from_city']; ?></li>
+                            <li>در تاریخ : <?php echo $row[$i]['fdate']; ?></li>
+                            <li>کلاس قیمتی : <?php echo $row[$i]['class_ghimat']; ?></li>
+                            <li>قیمت (بزرگسال) : <?php echo $row[$i]['price']; ?> ریال</li>
+                            <li>قیمت (کودک) : <?php echo $row[$i]['price'] * .5; ?> ریال</li>
+                            <li>قیمت (نوزاد) : <?php echo $row[$i]['price'] * .1; ?> ریال</li>
+                            <li>قیمت (کل) : <?php echo $row[$i]['price']; ?></li>
                         <?php } ?>
                     </ul>
                 </div>
                 <div class="passenger-info">
                     <header>مشخصات مسافر</header>
                     <form class="passenger-form" method="post">
-                        <input type="text" id="refrence_id" name="refrence_id" value="<?php echo $refrence_id ?>">
+                        <input type="hidden" id="refrence_id" name="refrence_id" value="<?php echo $refrence_id ?>">
                         <?php if ($adult > 0) { ?>
                             <ul class="passenger-number">
                                 <header class="people-header">بزرگسال</header>
@@ -65,17 +68,24 @@
                                             <label>نام خانوادگی (با حروف انگلیسی)</label>
                                             <input type="text" name="last-name-en[]">
                                         </div>
-                                        <div class="form-group-third">
-                                            <label>ملیت</label>
+                                        <div class="form-group-fourth">
+                                            <label>جنسیت</label>
                                             <select name="nationality[]">
-                                                <option value="1"></option>
+                                                <option value="1">مرد</option>
+                                                <option value="0">زن</option>
                                             </select>
                                         </div>
-                                        <div class="form-group-third">
+                                        <div class="form-group-fourth">
+                                            <label>ملیت</label>
+                                            <select name="nationality[]">
+                                                <option value="1">ایران</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-fourth">
                                             <label>شماره کارت ملی</label>
                                             <input type="text" name="nid-number[]">
                                         </div>
-                                        <div class="form-group-third">
+                                        <div class="form-group-fourth">
                                             <label>تاریخ تولد</label>
                                             <input class="pdatepicker" type="text" name="birthdate[]" readonly="">
                                         </div>
@@ -119,19 +129,26 @@
                                             <label>نام خانوادگی (با حروف انگلیسی)</label>
                                             <input type="text" name="last-name-en[]">
                                         </div>
-                                        <div class="form-group-third">
-                                            <label>ملیت</label>
+                                        <div class="form-group-fourth">
+                                            <label>جنسیت</label>
                                             <select name="nationality[]">
-                                                <option value="1"></option>
+                                                <option value="1">مرد</option>
+                                                <option value="0">زن</option>
                                             </select>
                                         </div>
-                                        <div class="form-group-third">
+                                        <div class="form-group-fourth">
+                                            <label>ملیت</label>
+                                            <select name="nationality[]">
+                                                <option value="1">ایران</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-fourth">
                                             <label>شماره کارت ملی</label>
                                             <input type="text" name="nid-number[]">
                                         </div>
-                                        <div class="form-group-third">
+                                        <div class="form-group-fourth">
                                             <label>تاریخ تولد</label>
-                                            <input class="pdatepicker" type="text" name="birthdate[]" readonly>
+                                            <input class="pdatepicker" type="text" name="birthdate[]" readonly="">
                                         </div>
                                         <div class="form-group-third">
                                             <label>شماره پاسپورت</label>
@@ -173,19 +190,26 @@
                                             <label>نام خانوادگی (با حروف انگلیسی)</label>
                                             <input type="text" name="last-name-en[]">
                                         </div>
-                                        <div class="form-group-third">
-                                            <label>ملیت</label>
+                                        <div class="form-group-fourth">
+                                            <label>جنسیت</label>
                                             <select name="nationality[]">
-                                                <option value="1"></option>
+                                                <option value="1">مرد</option>
+                                                <option value="0">زن</option>
                                             </select>
                                         </div>
-                                        <div class="form-group-third">
+                                        <div class="form-group-fourth">
+                                            <label>ملیت</label>
+                                            <select name="nationality[]">
+                                                <option value="1">ایران</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-fourth">
                                             <label>شماره کارت ملی</label>
                                             <input type="text" name="nid-number[]">
                                         </div>
-                                        <div class="form-group-third">
+                                        <div class="form-group-fourth">
                                             <label>تاریخ تولد</label>
-                                            <input class="pdatepicker" type="text" name="birthdate[]" readonly>
+                                            <input class="pdatepicker" type="text" name="birthdate[]" readonly="">
                                         </div>
                                         <div class="form-group-third">
                                             <label>شماره پاسپورت</label>
@@ -225,17 +249,16 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="form-group">
-                            <a class="reserve-btn transition-effect" href="#" onclick="reserve_ajax()">ثبت</a>
+                            <a class="reserve-btn transition-effect" href="#" onclick="reserve_ajax();">ثبت</a>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="row">
                 <div class="payment">
-                    <header>پس از اطمینان از صحت اطلاعات وارد شده، با کلیک بر روی درگاه مربوطه نسبت به خرید بلیط خود اقدام فرمایید.</header>
+                    <header>پس از اطمینان از صحت اطلاعات وارد شده، با کلیک بر روی درگاه مربوطه نسبت به خرید بلیط خود اقدام فرمایید. و یا بصورت <a href="#" class="credit-payment">پرداخت اعتباری</a> بلیط را تهیه فرمایید. </header>
                     <ul>
                         <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/mellat.png"></a></li>
-                        <a href="#" class="">پرداخت اعتباری</a>
                     </ul>
                 </div>
             </div>
@@ -245,96 +268,100 @@
                 </div>
             </div>
         </div>
-        <form class="credit-form" action="<?php echo base_url(); ?>index.php/flight/confirm_etebari">
-            <header>ورود کاربران</header>
-            <input type="hidden" name="refrence_id" value="<?php echo $refrence_id; ?>">
-            <div class="form-group">
-                <label>نام کاربری</label>
-                <input type="text" name="user">
-            </div>
-            <div class="form-group">
-                <label>رمز عبور</label>
-                <input type="password" name="pass">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="ثبت">
-            </div>
-        </form>
-        <script>
-            //persian datepicker 
-            $(".pdatepicker").persianDatepicker({
-                cellWidth: 35,
-                cellHeight: 35,
-                fontSize: 15
+    </div>
+    <div class="loading"><img src="<?php echo base_url(); ?>/assets/images/loadbar.gif"></div>
+    <div class="page-color"></div>
+    <form class="credit-form" action="<?php echo base_url(); ?>index.php/flight/confirm_etebari">
+        <header>ورود کاربران</header>
+        <input type="hidden" name="refrence_id" value="<?php echo $refrence_id; ?>">
+        <div class="form-group">
+            <label>نام کاربری</label>
+            <input type="text" name="user">
+        </div>
+        <div class="form-group">
+            <label>رمز عبور</label>
+            <input type="password" name="pass">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="ثبت">
+        </div>
+    </form>
+    <script>
+        //persian datepicker 
+        $(".pdatepicker").persianDatepicker({
+            cellWidth: 35,
+            cellHeight: 35,
+            fontSize: 15
+        });
+
+        //reserve ajax
+        function reserve_ajax() {
+            var p = {
+                'refrence_id': $("#refrence_id").val(),
+                'cell-number': $("#cell-number").val(),
+                'email': $("#email").val(),
+                'gender': $("input[name='gender[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'age': $("input[name='age[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'first-name': $("input[name='first-name[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'last-name': $("input[name='last-name[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'first-name-en': $("input[name='first-name-en[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'last-name-en': $("input[name='last-name-en[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'nationality': $("select[name='nationality[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'nid-number': $("input[name='nid-number[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'birthdate': $("input[name='birthdate[]']")
+                        .map(function () {
+                            return jalali_to_gregorian($(this).val());
+                        }).get(),
+                'passport-number': $("input[name='passport-number[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'passport-expire': $("input[name='passport-expire[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get(),
+                'passport-origin': $("input[name='passport-origin[]']")
+                        .map(function () {
+                            return $(this).val();
+                        }).get()
+            };
+            console.log(p);
+            $('.loading').show();
+            $.post("<?php echo base_url(); ?>index.php/flight/ticket_info", p, function (result) {
+                console.log(result);
+                console.log(p);
+                $('.loading').hide();
+                reserve_check_info();
             });
 
-            //reserve ajax
-            function reserve_ajax() {
-                var p = {
-                    'refrence_id': $("#refrence_id").val(),
-                    'cell-number': $("#cell-number").val(),
-                    'email': $("#email").val(),
-                    'gender': $("input[name='gender[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'age': $("input[name='age[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'first-name': $("input[name='first-name[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'last-name': $("input[name='last-name[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'first-name-en': $("input[name='first-name-en[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'last-name-en': $("input[name='last-name-en[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'nationality': $("select[name='nationality[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'nid-number': $("input[name='nid-number[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'birthdate': $("input[name='birthdate[]']")
-                            .map(function () {
-                                return jalali_to_gregorian($(this).val());
-                            }).get(),
-                    'passport-number': $("input[name='passport-number[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'passport-expire': $("input[name='passport-expire[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get(),
-                    'passport-origin': $("input[name='passport-origin[]']")
-                            .map(function () {
-                                return $(this).val();
-                            }).get()
-                };
-                console.log(p);
-                $('.loading').show();
-                $.post("<?php echo base_url(); ?>index.php/flight/ticket_info", p, function (result) {
-                    console.log(result);
-                    $('.loading').hide();
-                    reserve_check_info();
-                });
-
-                function reserve_check_info() {
-                    $(".passenger-form input").prop("disabled", true);
-                }
+            function reserve_check_info() {
+                $(".passenger-form input").prop("disabled", true);
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>

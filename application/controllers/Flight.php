@@ -89,7 +89,7 @@ class Flight extends CI_Controller {
             $status = TRUE;
             $this->flight_model->confirm_reserve($refrence_id);
         }
-        $data['out'] = array("refrence_id" => $refrence_id,"status"=>$status);
+        $data['out'] =  array("refrence_id" => $refrence_id,"status"=>$status);
         $this->load->view("ticket",$data);
     }
     

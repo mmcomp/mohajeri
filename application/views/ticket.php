@@ -21,27 +21,62 @@ $refrence_id = $out['refrence_id'];
     </head>
     <body>
         <style>
-            @font-face {
-                font-family: Yekan;
-                src: url(../fonts/Yekan.woff);
+            .flight {
+                list-style: none;
+                width: 800px;
+                margin: 0 auto;
+                border: 1px dashed #333;
+                border-bottom: none;
+                box-sizing: border-box;
+                padding: 5px;
             }
-            .ticket {
-                width: 980px;
-                height: 300px;
-                margin: 10px auto;
-                border: 1px solid #c7c7c7;
-                border-spacing: 0;
-                font-family: Yekan;
-                direction: rtl;
+
+            .flight li {
+                display: inline-block;
+                margin: 0 25px;
             }
-            .ticket tr td {
+
+            .passenger {
+                list-style: none;
+                width: 800px;
+                margin: 0 auto;
+                border: 1px dashed #333;
+                border-bottom: none;
+                box-sizing: border-box;
+                padding: 5px;
+            }
+
+            .passenger li {
+                margin: 5px 25px;
+            }
+
+            .notice {
+                list-style: none;
+                width: 800px;
+                margin: 0 auto;
+                border: 1px dashed #333;
+                box-sizing: border-box;
+                padding: 5px;
+                
+            }
+
+            .notice li {
+                margin: 5px 25px;
                 text-align: center;
             }
-            .ticket tr:nth-of-type(even){
-                background-color: #c7c7c7;
-            }
+
         </style>
-        <table class="ticket"></table>
+        <ul class="flight">
+            <li style="width: 100%; margin-bottom: 20px; text-align: center;">*** itinerary receipt ***</li>
+        </ul>
+        <div class="passenger-box">
+            
+        </div>
+        <ul class="notice">
+            <li>
+                notice: carriage and other services provided by the carrier are subject to conditions of carriage, which are hereby incorporated by reference. these conditions my be obtained from the issuing carrier.
+            </li>
+        </ul>
 
         <?php
         if ($status) {
@@ -63,7 +98,7 @@ $refrence_id = $out['refrence_id'];
                                 not_ready = true;
                             }
                         }
-                        if(result.stat.length===0)
+                        if (result.stat.length === 0)
                         {
                             not_ready = true;
                         }
@@ -86,9 +121,9 @@ $refrence_id = $out['refrence_id'];
                             console.log('TICKETS : ');
                             for (var i = 0; i < tickets.length; i++)
                             {
-                                $(".ticket").append('<tr><td>نام : </td><td>' + tickets[i].fname + '</td><td>نام خانوادگی  : </td><td>' + tickets[i].lname + '</td><td>نام (با حروف انگلیسی) : </td><td>' + tickets[i].fname_en + '</td><td>نام خانوادگی  (با حروف انگلیسی) : </td><td>' + tickets[i].lname_en + '</td></tr>');
                                 ticket = tickets[i];
                                 console.log(ticket);
+                                $(".passenger-box").append('<ul class="passenger"><li>ticket-Number : ' + tickets[i].ticket_number2 + '</li><li>name : ' + tickets[i].lname_en + ' / ' + tickets[i].fname_en + '</li><li>age : ' + tickets[i].age + '</li><li>birthdate : ' + tickets[i].birthday + '</li><li>nationality : iran</li></ul>');
                             }
                             // Flights
                             console.log('FLIGHTS : ');
@@ -96,6 +131,7 @@ $refrence_id = $out['refrence_id'];
                             {
                                 flight_info = flight_infos[i];
                                 console.log(flight_info);
+                                $(".flight").append('<li>from : ' + flight_info[i].from_city + '</li><li>to : ' + flight_info[i].to_city + '</li><li>flight-date : ' + flight_info[i].fdate + '</li><li>flight-time : ' + flight_info[i].ftime + '</li>');
                             }
                         }
                     });

@@ -67,7 +67,9 @@ class Flight_model extends CI_Model {
         {
             $reserve_tmp = $res['id'];
             $req = 'C[{"Id":"'.$reserve_tmp.'", "FlightNo":"'.$res['flight_number'].'", "From_City":"'.$res['from_city'].'", "To_City":"'.$res['to_city'].'", "PCount":"'.$res['pcount'].'", "Date":"'.date("dM",strtotime($res['fdate'])).'", "Airline":"'.$res['airline'].'", "S1":"2", "S2":"4"}]';
-            $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,1)");
+            //Test is 5 change into to 0 for real
+            //پنج تستی است در خط بعد اگر صفر شود میشه واقعی
+            $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
         }        
     }
     
