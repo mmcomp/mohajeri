@@ -257,9 +257,13 @@
             <div class="row">
                 <div class="payment">
                     <header>پس از اطمینان از صحت اطلاعات وارد شده، با کلیک بر روی درگاه مربوطه نسبت به خرید بلیط خود اقدام فرمایید. و یا بصورت <a href="#" class="credit-payment">پرداخت اعتباری</a> بلیط را تهیه فرمایید. </header>
-                    <ul>
-                        <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/mellat.png"></a></li>
-                    </ul>
+                    <form class="payment-bank" action="<?php echo base_url(); ?>index.php/flight/confirm_etebari_result">
+                        <input type="hidden" name="refrence_id" value="<?php echo $refrence_id; ?>">
+                        <ul>
+                            <!--<li><a href="#"><img src="<?php echo base_url(); ?>assets/images/mellat.png"></a></li>-->
+                            <li><a href="<?php echo base_url(); ?>index.php/payment" class="saman-bank"><img src="<?php echo base_url(); ?>assets/images/saman.png"></a></li>
+                        </ul>
+                    </form>
                 </div>
             </div>
             <div class="row">
@@ -287,6 +291,10 @@
         </div>
     </form>
     <script>
+        $(".saman-bank").on("click", function (){
+            $(".payment-bank").submit();
+        });
+        
         //persian datepicker 
         $(".pdatepicker").persianDatepicker({
             cellWidth: 35,

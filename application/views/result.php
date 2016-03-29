@@ -9,268 +9,221 @@
         <script src="<?php echo base_url(); ?>assets/js/persian-datepicker.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/autocomplete.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/date-set.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=fa"></script>
         <link href="<?php echo base_url(); ?>assets/css/website.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>assets/css/autocomplete.min.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>assets/css/persian-datepicker.css" rel="stylesheet">
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row image-cover">
-                <div class="main-header-box">
-                    <div class="main-header">
-                        <a href="#"><img title="آژانس مهاجری" alt="آژانس مهاجری" class="mohajeri-logo" src="<?php echo base_url(); ?>assets/images/mohajeri-logo.png"></a>
+            <div class="image-cover">
+                <div class="row">
+                    <div class="main-header-box">
+                        <div class="main-header">
+                            <a href="#"><img title="آژانس مهاجری" alt="آژانس مهاجری" class="mohajeri-logo" src="<?php echo base_url(); ?>assets/images/mohajeri-logo.png"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="search-box">
-                    <ul>
-                        <li id="tab2" class="active">پرواز سیستمی (داخلی)</li>
-                        <li id="tab3">پرواز سیستمی (خارجی)</li>
-                        <li id="tab1">پرواز چارتری</li>
-                    </ul>
-                    <!--charter-->
-                    <div id="charter-flight">
-                        <form method="post" class="search-form charter-form" style="padding-top: 60px;" action="">
-                            <div class="form-group-half">
-                                <label>مبداء</label>
-                                <input type="text" id="charter-from-city" class="autocomplete">
-                            </div>
-                            <div class="form-group-half">
-                                <label>مقصد</label>
-                                <input type="text" id="charter-to-city" class="autocomplete">
-                            </div>
-                            <div class="form-group-half">
-                                <label>نوع پرواز</label>
-                                <select id="charter-flight-type" id="charter-flight-type">
-                                    <option value="0">یک طرفه</option>
-                                    <option value="1">دو طرفه</option>
-                                </select>
-                            </div>
-                            <div class="form-group-half">
-                                <label>تاریخ رفت</label>
-                                <input class="pdatepicker" type="text" id="charter-departure-date" readonly>
-                                <div id="charter-return">
-                                    <label>تاریخ برگشت</label>
-                                    <input class="pdatepicker" type="text" id="charter-return-date" readonly>
+                    <div class="search-box">
+                        <ul>
+                            <li id="tab2" class="active">پرواز سیستمی (داخلی)</li>
+                            <li id="tab3">پرواز سیستمی (خارجی)</li>
+                            <li id="tab1">پرواز چارتری</li>
+                        </ul>
+                        <!--charter-->
+                        <div id="charter-flight">
+                            <form method="post" class="search-form charter-form" style="padding-top: 60px;" action="">
+                                <div class="form-group-half">
+                                    <label>مبداء</label>
+                                    <input type="text" id="charter-from-city" class="autocomplete">
                                 </div>
-                            </div>
-                            <div class="form-group-third">
-                                <label>بزرگسال</label>
-                                <select id="charter-adult">
-                                    <?php for ($i = 1; $i < 10; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group-third">
-                                <label>کودک</label>
-                                <select id="charter-child">
-                                    <?php for ($i = 0; $i < 6; $i++) { ?>
-                                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group-third">
-                                <label>نوزاد</label>
-                                <select id="charter-infant">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <a id="charter-submit" href="#" class="transition-effect">جستجو</a>
-                            </div>
-                        </form>
-                    </div>
-                    <!--liaison-->
-                    <div id="liaison-flight">
-                        <form method="post" class="search-form" style="padding-top: 60px;" action="">
-                            <div class="form-group-half">
-                                <label>مبداء</label>
-                                <input type="text" id="liaison-from-city" class="autocomplete">
-                            </div>
-                            <div class="form-group-half">
-                                <label>مقصد</label>
-                                <input type="text" id="liaison-to-city" class="autocomplete">
-                            </div>
-                            <div class="form-group-half">
-                                <label>نوع پرواز</label>
-                                <select id="liaison-flight-type">
-                                    <option value="0">یک طرفه</option>
-                                    <option value="1">دو طرفه</option>
-                                </select>
-                            </div>
-                            <div class="form-group-half">
-                                <div id="liaison-one-way-date">
-                                    <label>تاریخ پرواز</label>
-                                    <input class="pdatepicker" type="text" id="liaison-direct-date" name="liaison-direct-date" readonly>
+                                <div class="form-group-half">
+                                    <label>مقصد</label>
+                                    <input type="text" id="charter-to-city" class="autocomplete">
                                 </div>
-                                <div id="liaison-two-way-date">
+                                <div class="form-group-half">
+                                    <label>نوع پرواز</label>
+                                    <select id="charter-flight-type" id="charter-flight-type">
+                                        <option value="0">یک طرفه</option>
+                                        <option value="1">دو طرفه</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-half">
+                                    <label>تاریخ رفت</label>
+                                    <input class="pdatepicker" type="text" id="charter-departure-date" readonly>
+                                    <div id="charter-return">
+                                        <label>تاریخ برگشت</label>
+                                        <input class="pdatepicker" type="text" id="charter-return-date" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>بزرگسال</label>
+                                    <select id="charter-adult">
+                                        <?php for ($i = 1; $i < 10; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>کودک</label>
+                                    <select id="charter-child">
+                                        <?php for ($i = 0; $i < 6; $i++) { ?>
+                                            <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>نوزاد</label>
+                                    <select id="charter-infant">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <a id="charter-submit" href="#" class="transition-effect">جستجو</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!--liaison-->
+                        <div id="liaison-flight">
+                            <form method="post" class="search-form" style="padding-top: 60px;" action="">
+                                <div class="form-group-half">
+                                    <label>مبداء</label>
+                                    <input type="text" id="liaison-from-city" class="autocomplete">
+                                </div>
+                                <div class="form-group-half">
+                                    <label>مقصد</label>
+                                    <input type="text" id="liaison-to-city" class="autocomplete">
+                                </div>
+                                <div class="form-group-half">
+                                    <label>نوع پرواز</label>
+                                    <select id="liaison-flight-type">
+                                        <option value="0">یک طرفه</option>
+                                        <option value="1">دو طرفه</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-half">
+                                    <div id="liaison-one-way-date">
+                                        <label>تاریخ پرواز</label>
+                                        <input class="pdatepicker" type="text" id="liaison-direct-date" name="liaison-direct-date" readonly>
+                                    </div>
+                                    <div id="liaison-two-way-date">
+                                        <label>پرواز رفت</label>
+                                        <input class="pdatepicker" type="text" id="liaison-departure-date" name="liaison-departure-date" readonly>
+                                        <label>پرواز برگشت</label>
+                                        <input class="pdatepicker" type="text" id="liaison-arrival-date" name="liaison-arrival-date" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>بزرگسال</label>
+                                    <select id="liaison-adult" name="liaison-adult">
+                                        <?php for ($i = 1; $i < 10; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>کودک</label>
+                                    <select id="liaison-child" name="liaison-child">
+                                        <?php for ($i = 0; $i < 6; $i++) { ?>
+                                            <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>نوزاد</label>
+                                    <select id="liaison-infant" name="liaison-infant">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <a href="#" id="liaison-submit" class="transition-effect">جستجو</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!--amadeus-->
+                        <div id="amadeus-flight">
+                            <form method="post" class="search-form" style="padding-top: 60px;">
+                                <div class="form-group-half">
+                                    <label>مبداء</label>
+                                    <input type="text" id="amadeus-from-city" class="autocomplete">
+                                </div>
+                                <div class="form-group-half">
+                                    <label>مقصد</label>
+                                    <input type="text" id="amadeus-to-city" class="autocomplete">
+                                </div>
+                                <div class="form-group-half">
                                     <label>پرواز رفت</label>
-                                    <input class="pdatepicker" type="text" id="liaison-departure-date" name="liaison-departure-date" readonly>
-                                    <label>پرواز برگشت</label>
-                                    <input class="pdatepicker" type="text" id="liaison-arrival-date" name="liaison-arrival-date" readonly>
+                                    <input type="text" id="amadeus-departure-date" class="gregorian-datepicker">
                                 </div>
-                            </div>
-                            <div class="form-group-third">
-                                <label>بزرگسال</label>
-                                <select id="liaison-adult" name="liaison-adult">
-                                    <?php for ($i = 1; $i < 10; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group-third">
-                                <label>کودک</label>
-                                <select id="liaison-child" name="liaison-child">
-                                    <?php for ($i = 0; $i < 6; $i++) { ?>
-                                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group-third">
-                                <label>نوزاد</label>
-                                <select id="liaison-infant" name="liaison-infant">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <a href="#" id="liaison-submit" class="transition-effect">جستجو</a>
-                            </div>
-                        </form>
+                                <div class="form-group-half">
+                                    <label>پرواز برگشت</label>
+                                    <input type="text" id="amadeus-return-date" class="gregorian-datepicker"> 
+                                </div>
+                                <div class="form-group-third">
+                                    <label>بزرگسال</label>
+                                    <select id="amadeus-adult" id="amadeus-adult">
+                                        <?php for ($i = 1; $i < 10; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>کودک</label>
+                                    <select id="amadeus-child" id="amadeus-child">
+                                        <?php for ($i = 0; $i < 6; $i++) { ?>
+                                            <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group-third">
+                                    <label>نوزاد</label>
+                                    <select id="amadeus-infant" id="amadeus-infant">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <a href="#" id="amadeus-submit" class="transition-effect">جستجو</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <!--amadeus-->
-                    <div id="amadeus-flight">
-                        <form method="post" class="search-form" style="padding-top: 60px;">
-                            <div class="form-group-half">
-                                <label>مبداء</label>
-                                <input type="text" id="amadeus-from-city" class="autocomplete">
-                            </div>
-                            <div class="form-group-half">
-                                <label>مقصد</label>
-                                <input type="text" id="amadeus-to-city" class="autocomplete">
-                            </div>
-                            <div class="form-group-half">
-                                <label>پرواز رفت</label>
-                                <input type="text" id="amadeus-departure-date" class="gregorian-datepicker">
-                            </div>
-                            <div class="form-group-half">
-                                <label>پرواز برگشت</label>
-                                <input type="text" id="amadeus-return-date" class="gregorian-datepicker"> 
-                            </div>
-                            <div class="form-group-third">
-                                <label>بزرگسال</label>
-                                <select id="amadeus-adult" id="amadeus-adult">
-                                    <?php for ($i = 1; $i < 10; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group-third">
-                                <label>کودک</label>
-                                <select id="amadeus-child" id="amadeus-child">
-                                    <?php for ($i = 0; $i < 6; $i++) { ?>
-                                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group-third">
-                                <label>نوزاد</label>
-                                <select id="amadeus-infant" id="amadeus-infant">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <a href="#" id="amadeus-submit" class="transition-effect">جستجو</a>
-                            </div>
+                </div>
+                <!--charter result-->
+                <div class="row" id="charter-domestic-oneway-result">
+                    <div class="result-show">
+                        <form method="post" action="<?php echo base_url(); ?>index.php/charter/charter_reserve">
+                            <header id="charter-domestic-oneway-header" class="accordion"></header>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>ردیف</th>
+                                        <th>مبداء</th>
+                                        <th>مقصد</th>
+                                        <th>ایرلاین</th>
+                                        <th>شماره پرواز</th>
+                                        <th>ساعت حرکت</th>
+                                        <th>ساعت فرود</th>
+                                        <th>ظرفیت</th>
+                                        <th>کلاس قیمت</th>
+                                        <th>قیمت (تومان)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="charter-domestic-oneway-content">
+                                </tbody>
+                            </table>
                         </form>
                     </div>
                 </div>
-            </div>
-            <!--charter result-->
-            <div class="row" id="charter-domestic-oneway-result">
-                <div class="result-show">
-                    <form method="post" action="<?php echo base_url(); ?>index.php/charter/charter_reserve">
-                        <header id="charter-domestic-oneway-header" class="accordion"></header>
+                <div class="row" id="charter-domestic-departure-result">
+                    <div class="result-show">
+                        <header id="charter-domestic-departure-header" class="accordion"></header>
                         <table>
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>ردیف</th>
-                                    <th>مبداء</th>
-                                    <th>مقصد</th>
-                                    <th>ایرلاین</th>
-                                    <th>شماره پرواز</th>
-                                    <th>ساعت حرکت</th>
-                                    <th>ساعت فرود</th>
-                                    <th>ظرفیت</th>
-                                    <th>کلاس قیمت</th>
-                                    <th>قیمت (تومان)</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="charter-domestic-oneway-content">
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <div class="row" id="charter-domestic-departure-result">
-                <div class="result-show">
-                    <header id="charter-domestic-departure-header" class="accordion"></header>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ردیف</th>
-                                <th>مبداء</th>
-                                <th>مقصد</th>
-                                <th>ایرلاین</th>
-                                <th>شماره پرواز</th>
-                                <th>ساعت حرکت</th>
-                                <th>ساعت فرود</th>
-                                <th>ظرفیت</th>
-                                <th>کلاس قیمت</th>
-                                <th>قیمت(تومان)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="charter-domestic-departure-content">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row" id="charter-domestic-return-result">
-                <div class="result-show">
-                    <header id="charter-domestic-return-header" class="accordion"></header>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ردیف</th>
-                                <th>مبداء</th>
-                                <th>مقصد</th>
-                                <th>ایرلاین</th>
-                                <th>شماره پرواز</th>
-                                <th>ساعت حرکت</th>
-                                <th>ساعت فرود</th>
-                                <th>ظرفیت</th>
-                                <th>کلاس قیمت</th>
-                                <th>قیمت (تومان)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="charter-domestic-return-content">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!--liaison result-->
-            <div class="row" id="liaison-result-show">
-                <div class="result-show">
-                    <form method="post" action="<?php echo base_url(); ?>index.php/flight/start_reserve">
-                        <header id="liaison-result-header"></header>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
                                     <th>ردیف</th>
                                     <th>مبداء</th>
                                     <th>مقصد</th>
@@ -281,51 +234,115 @@
                                     <th>ظرفیت</th>
                                     <th>کلاس قیمت</th>
                                     <th>قیمت(تومان)</th>
-                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody id="liaison-result-content">
+                            <tbody id="charter-domestic-departure-content">
                             </tbody>
                         </table>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <!--amadeus result-->
-            <div class="row" id="amadeus-result-show">
-                <div class="result-show">
-                    <header id="amadeus-result-header"></header>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ردیف</th>
-                                <th>مبداء</th>
-                                <th>مقصد</th>
-                                <th>ایرلاین</th>
-                                <th>شماره پرواز</th>
-                                <th>ساعت حرکت</th>
-                                <th>ساعت فرود</th>
-                                <th>کلاس قیمت</th>  
-                            </tr>
-                        </thead>
-                        <tbody id="amadeus-result-content">
-                        </tbody>
-                    </table>
+                <div class="row" id="charter-domestic-return-result">
+                    <div class="result-show">
+                        <header id="charter-domestic-return-header" class="accordion"></header>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>مبداء</th>
+                                    <th>مقصد</th>
+                                    <th>ایرلاین</th>
+                                    <th>شماره پرواز</th>
+                                    <th>ساعت حرکت</th>
+                                    <th>ساعت فرود</th>
+                                    <th>ظرفیت</th>
+                                    <th>کلاس قیمت</th>
+                                    <th>قیمت (تومان)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="charter-domestic-return-content">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <!--tour-->
-            <div class="row">
-                <div class="tour">
-                    <ul>
-                        <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/china.jpg">تور چین</a></li>
-                        <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/malaysia.jpg">تور مالزی</a></li>
-                        <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/thailand.jpg">تور تایلند</a></li>
-                        <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/turkey.jpg">تور ترکیه</a></li>
-                    </ul>
+                <!--liaison result-->
+                <div class="row" id="liaison-result-show">
+                    <div class="result-show">
+                        <form method="post" action="<?php echo base_url(); ?>index.php/flight/start_reserve">
+                            <header id="liaison-result-header" class="accordion"></header>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>ردیف</th>
+                                        <th>مبداء</th>
+                                        <th>مقصد</th>
+                                        <th>ایرلاین</th>
+                                        <th>شماره پرواز</th>
+                                        <th>ساعت حرکت</th>
+                                        <th>ساعت فرود</th>
+                                        <th>ظرفیت</th>
+                                        <th>کلاس قیمت</th>
+                                        <th>قیمت(تومان)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="liaison-result-content">
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="main-footer">
-                    تمامی حقوق سایت متعلق به آژانس مهاجری خراسان می باشد.
+                <!--amadeus result-->
+                <div class="row" id="amadeus-result-show">
+                    <div class="result-show">
+                        <header id="amadeus-result-header"></header>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>مبداء</th>
+                                    <th>مقصد</th>
+                                    <th>ایرلاین</th>
+                                    <th>شماره پرواز</th>
+                                    <th>ساعت حرکت</th>
+                                    <th>ساعت فرود</th>
+                                    <th>کلاس قیمت</th>  
+                                </tr>
+                            </thead>
+                            <tbody id="amadeus-result-content">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--tour-->
+                <div class="row">
+                    <div class="tour">
+                        <ul>
+                            <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/china.jpg">تور چین</a></li>
+                            <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/malaysia.jpg">تور مالزی</a></li>
+                            <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/thailand.jpg">تور تایلند</a></li>
+                            <li><a href="#"><img src="<?php echo base_url(); ?>assets/images/turkey.jpg">تور ترکیه</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="address-box">
+                        <div id="map_canvas" class="google-map"></div>
+                        <div class="full-address">
+                            نشانی  : مشهد ، خیابان خسروی ، نرسیده به چهارراه خسروی ، جنب هتل سخاوت
+                            <br>
+                            تلفن : 051-32222982
+                            <br>
+                            فکس : 051-32217100
+                            <br>
+                            پشتیبانی رزرواسیون : 09151151960
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="main-footer">
+                        تمامی حقوق سایت متعلق به آژانس مهاجری خراسان می باشد.
+                    </div>
                 </div>
             </div>
         </div>
@@ -351,26 +368,24 @@
         fontSize: 15
     });
 
-    //cities
-    $(function () {
-        $('.autocomplete').autoComplete({minChars: 2,
-            source: function (term, suggest) {
-                term = term.toLowerCase();
-                var cities = [<?php
-                                    foreach ($cities as $city) {
-                                        echo "'" . $city['iata'] . " | ";
-                                        echo $city['fa_name'] . " | ";
-                                        echo $city['en_name'] . " | ";
-                                        echo $city['airport_name'] . "',";
-                                    }
-                                    ?>];
-                var suggestions = [];
-                for (i = 0; i < cities.length; i++)
-                    if (~cities[i].toLowerCase().indexOf(term))
-                        suggestions.push(cities[i]);
-                suggest(suggestions);
-            }
-        });
+    //cities     $(function () {
+    $('.autocomplete').autoComplete({minChars: 2,
+        source: function (term, suggest) {
+            term = term.toLowerCase();
+            var cities = [<?php
+                                        foreach ($cities as $city) {
+                                            echo "'" . $city['iata'] . " | ";
+                                            echo $city['fa_name'] . " | ";
+                                            echo $city['en_name'] . " | ";
+                                            echo $city['airport_name'] . "',";
+                                        }
+                                        ?>];
+            var suggestions = [];
+            for (i = 0; i < cities.length; i++)
+                if (~cities[i].toLowerCase().indexOf(term))
+                    suggestions.push(cities[i]);
+            suggest(suggestions);
+        }
     });
 
     //charter ajax
@@ -396,7 +411,6 @@
             }
         });
     }
-
     function show_charter_domestic_oneway(result) {
         $('.loading').hide();
         var flight_info = result;
@@ -473,7 +487,6 @@
             }
         }
     }
-
     //liaison ajax
     function check_result_liaison(ids) {
         var p = {
@@ -500,16 +513,24 @@
         var res = result.result;
         var obj;
         var j = 1;
-        var date = $("#liaison-direct-date").val();
         $('#liaison-result-show').fadeIn();
         $('#liaison-result-content').html('');
+        $('#liaison-result-header').html('');
+        var liaison_departure_date = $('#liaison-direct-date').val();
+        var liaison_from_city = $('#liaison-from-city').val().split('|')[1].trim();
+        var liaison_to_city = $('#liaison-to-city').val().split('|')[1].trim();
         var liaison_adult = $("#liaison-adult").val();
         var liaison_child = $("#liaison-child").val();
         var liaison_infant = $("#liaison-infant").val();
-        for (var i = 0; i < res.length; i++, j++) {
-            obj = res[i];
-//            $('#liaison-result-header').append('پرواز سیستمی داخلی (' + c_from_city + ' - ' + charter_to_city + ')' + ' - ' + charter_departure_date);
-            $('#liaison-result-content').append('<tr><td><input type="radio" name="flight_key[]" class="flight-key" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"></td><input type="hidden" name="child" value="' + liaison_child + '"></td><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + j + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td><td><button class="liaison-result-submit">ادامه</button></td></tr></tr>');
+        if (result.result === 0 || result.result === undefined) {
+            $('#liaison-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+            $('#liaison-result-header').append('پرواز چارتری (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
+        } else {
+            $('#liaison-result-header').append('پرواز سیستمی داخلی (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
+            for (var i = 0; i < res.length; i++, j++) {
+                obj = res[i];
+                $('#liaison-result-content').append('<tr><td><input type="radio" name="flight_key[]" class="flight-key" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"></td><input type="hidden" name="child" value="' + liaison_child + '"></td><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + j + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td><td><button class="liaison-result-submit">ادامه</button></td></tr></tr>');
+            }
         }
     }
 

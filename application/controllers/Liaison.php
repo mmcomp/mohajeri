@@ -32,6 +32,10 @@ class Liaison extends CI_Controller {
     }
 
     public function show_liaison_result() {
+        $airlines_array = array(
+            "IR"
+        );
+        $airlines = "'".implode("','", $airlines_array)."'";
         $out = array(
             "result_ok" => FALSE,
             "result" => array()
@@ -55,7 +59,7 @@ class Liaison extends CI_Controller {
             $out['result_ok'] = $result_ok;
             if ($result_ok) {
                 foreach ($from_city as $i => $from) {
-                    $query = $this->db->query("select flight1.tflight id, from_city from_city_iata,to_city to_city_iata,airline airline_iata,flight_number,fdate departure_time,ltime landing_time,class_ghimat class,capacity,price from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where capacity!= 0 and flight1.source_id = 1 and from_city = '$from' and to_city = '" . $to_city[$i] . "' and date(fdate) = '" . date("Y-m-d", strtotime($fdate[$i])) . "'");
+                    $query = $this->db->query("select flight1.tflight id, from_city from_city_iata,to_city to_city_iata,airline airline_iata,flight_number,fdate departure_date,ftime departure_time,ltime landing_time,class_ghimat class,capacity,price from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where airline in ($airlines) and  capacity!= 0 and flight1.source_id = 1 and from_city = '$from' and to_city = '" . $to_city[$i] . "' and date(fdate) = '" . date("Y-m-d", strtotime($fdate[$i])) . "'");
                     $tmp = $query->result_array();
                     foreach ($tmp as $t) {
                         $out['result'][] = $t;

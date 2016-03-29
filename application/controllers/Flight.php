@@ -25,7 +25,7 @@ class Flight extends CI_Controller {
         if (isset($_SESSION['refrence_id'])) {
             //Liason
             $refrence_id = $_SESSION['refrence_id'];
-            $tmp = $this->flight_model->get_flight_refrence($refrence_id);
+            $data['test'] = $tmp = $this->flight_model->get_flight_refrence($refrence_id);
             $data['flight_info'] = $tmp['flight_info'];
             $data['reserve_tmp'] = $tmp['reserve_tmp'];
             $data['adult'] = $adl;
@@ -50,6 +50,16 @@ class Flight extends CI_Controller {
                 }
             }
         }
+        $flight_info = $data['flight_info'];
+        $total_price = 0;
+        foreach ($flight_info as $row) {
+            $price = $row['price'];
+            $adl_price = $adl * $price;
+            $child_price = $chd * $price * 0.5;
+            $infant_price = $inf * $price * 0.1;
+            $total_price += $adl_price + $child_price + $infant_price;
+        }
+        $this->flight_model->liaison_payment($refrence_id, $total_price);
         $this->load->view('reserve', $data);
     }
 
@@ -78,26 +88,36 @@ class Flight extends CI_Controller {
         $this->load->view('ajax_result', $data);
     }
 
-    public function confirm_etebari()
-    {
+    public function confirm_etebari() {
         $refrence_id = $_REQUEST['refrence_id'];
         $user = $_REQUEST['user'];
         $pass = $_REQUEST['pass'];
         $status = FALSE;
-        if($user == 'admin' && $pass == 'admin')
-        {
+        if ($user == 'admin' && $pass == 'admin1') {
             $status = TRUE;
             $this->flight_model->confirm_reserve($refrence_id);
         }
-        $data['out'] =  array("refrence_id" => $refrence_id,"status"=>$status);
-        $this->load->view("ticket",$data);
+        $data['out'] = array("refrence_id" => $refrence_id, "status" => $status);
+        $this->load->view("ticket", $data);
     }
-    
-    public function confirm_etebari_result()
-    {
+
+    public function confirm_etebari_result() {
         $refrence_id = $_REQUEST['refrence_id'];
         $out = $this->flight_model->confirm_result($refrence_id);
         $data['out'] = $out;
-        $this->load->view("ajax_result",$data);
+        $data['bank'] = TRUE;
+        if (isset($_SESSION['bank']) && $_SESSION['bank'] == 'saman' && trim($_SESSION['BankRefrenceNumber']) != '') {
+            //Is Cash and is from saman port 
+            $BankRefrenceNumber = $_SESSION['BankRefrenceNumber'];
+            $soapClient = new SoapClient("https://acquirer.samanepay.com/payments/referencepayment.asmx?WSDL");
+            $out = $soapClient->verifyTransaction($BankRefrenceNumber, $_SESSION['MID']);
+//            var_dump($out);
+            if ($out <= 0) {
+                //Verification Successful
+                $data['bank'] = FALSE;
+            }
+        }
+        $this->load->view("ajax_result", $data);
     }
+
 }

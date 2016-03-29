@@ -93,7 +93,7 @@ $refrence_id = $out['refrence_id'];
                         var not_ready = false;
                         for (var i = 0; i < result.stat.length; i++)
                         {
-                            if (result.stat[i].result == 0)
+                            if (result.stat[i].result == 0 || (result.stat[i].result != 0 && result.data.tickets[0].ticket_number2==''))
                             {
                                 not_ready = true;
                             }
