@@ -1,5 +1,19 @@
 $(document).ready(function () {
-    
+
+    //google map
+    var initLat = 36.2904484265274;
+    var initLng = 59.6069342829287;
+    var initZoom = 15;
+    function initialize() {
+        var latlng = new google.maps.LatLng(initLat, initLng);
+        var myOptions = {zoom: initZoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        marker = new google.maps.Marker({position: latlng, map: map, draggable: false, scrollwheel: false});
+    }
+    window.onload = function () {
+        initialize();
+    };
+
     //address
     $(".address").hide();
     $(".location-icon").on("click", function () {
@@ -109,18 +123,16 @@ $(document).ready(function () {
     });
 
     //search box settings liaison
-    $("#liaison-two-way-date").hide();
+    $("#liaison-return").hide();
+    $("#liaison-return-date").prop("disabled", true);
     $("#liaison-flight-type").on("change", function () {
         var flight_type = $(this).val();
         if (flight_type == 1) {
-            $("#liaison-two-way-date").fadeIn();
-            $("#liaison-one-way-date").hide();
-            $("#liaison-direct-date").val("");
+            $("#liaison-return").fadeIn();
+            $("#liaison-return-date").prop("disabled", false);
         } else {
-            $("#liaison-two-way-date").hide();
-            $("#liaison-one-way-date").fadeIn();
-            $("#liaison-departure-date").val("");
-            $("#liaison-arrival-date").val("");
+            $("#liaison-return").hide();
+            $("#liaison-return-date").prop("disabled", true);
         }
     });
 
@@ -131,17 +143,30 @@ $(document).ready(function () {
     });
 
     //liaison submit
+    $(".liaison-result-submit").hide();
     $("#liaison-result-show").hide();
+    $("#liaison-result-show-departure").hide();
     $("#liaison-submit").on("click", function () {
         search_liaison();
     });
-    
+
     //amadeus submit
-    $("#amadeus-submit").on("click", function (){
-       search_amadeus(); 
+    $("#amadeus-submit").on("click", function () {
+        search_amadeus();
     });
 
-    //result hide/show
+    //amadeus airlines
+    $(".airline-box ul").hide();
+    $(".airline-box").on("click", function () {
+        $(".airline-box ul").fadeIn();
+    });
+    $(".airline-box ul input").change(function () {
+        if (this.checked) {
+            $("#amadeus-airline-iata").val($("#amadeus-airline-iata").val() + ' , ' + $(this).val());
+        }
+    });
+
+    //result hide and show
     $("#charter-domestic-oneway-result").hide();
     $("#charter-domestic-departure-result").hide();
     $("#charter-domestic-return-result").hide();
@@ -152,19 +177,24 @@ $(document).ready(function () {
     $(".charter-result-submit").on("click", function () {
         $("#charter-domestic-oneway-result form").submit();
     });
-    
-    //liaison result show
-    $(".liaison-result-submit").on("click", function (){
-       $("#liaison-result-show form").submit(); 
+
+    //liaison result submit
+    $(".liaison-result-submit").on("click", function () {
+        $("#liaison-result-show form").submit();
     });
-    
+
     //accordion
     $(".accordion").on("click", function () {
         $(this).next("table").toggle();
     });
-    
+
     //credit form
     $(".credit-form").hide();
-    
+    $(".payment").hide();
+    $(".page-color").hide();
+    $(".credit-payment").on("click", function () {
+        $(".page-color").fadeIn();
+        $(".credit-form").fadeIn();
+    });
 
 });

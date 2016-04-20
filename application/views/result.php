@@ -102,15 +102,11 @@
                                     </select>
                                 </div>
                                 <div class="form-group-half">
-                                    <div id="liaison-one-way-date">
-                                        <label>تاریخ پرواز</label>
-                                        <input class="pdatepicker" type="text" id="liaison-direct-date" name="liaison-direct-date" readonly>
-                                    </div>
-                                    <div id="liaison-two-way-date">
-                                        <label>پرواز رفت</label>
-                                        <input class="pdatepicker" type="text" id="liaison-departure-date" name="liaison-departure-date" readonly>
-                                        <label>پرواز برگشت</label>
-                                        <input class="pdatepicker" type="text" id="liaison-arrival-date" name="liaison-arrival-date" readonly>
+                                    <label>تاریخ رفت</label>
+                                    <input class="pdatepicker" type="text" id="liaison-departure-date" readonly>
+                                    <div id="liaison-return">
+                                        <label>تاریخ برگشت</label>
+                                        <input class="pdatepicker" type="text" id="liaison-return-date" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group-third">
@@ -152,17 +148,33 @@
                                     <label>مقصد</label>
                                     <input type="text" id="amadeus-to-city" class="autocomplete">
                                 </div>
-                                <div class="form-group-half">
+                                <div class="form-group-third">
                                     <label>پرواز رفت</label>
-                                    <input type="text" id="amadeus-departure-date" class="gregorian-datepicker">
+                                    <input type="text" id="amadeus-departure-date" class="pdatepicker">
                                 </div>
-                                <div class="form-group-half">
+                                <div class="form-group-third">
                                     <label>پرواز برگشت</label>
-                                    <input type="text" id="amadeus-return-date" class="gregorian-datepicker"> 
+                                    <input type="text" id="amadeus-return-date" class="pdatepicker"> 
+                                </div>
+                                <div class="form-group-third">
+                                    <label>ایرلاین</label>
+                                    <div class="airline-box">
+                                        <input type="text" name="amadeus-airline-iata[]" id="amadeus-airline-iata">
+                                        <ul>
+                                            <li><input type="checkbox" value="TK">ترکیش</li>
+                                            <li><input type="checkbox" value="HM">هما</li>
+                                            <li><input type="checkbox" value="EP">آسمان</li>
+                                            <li><input type="checkbox" value="MH">ماهان</li>
+                                            <li><input type="checkbox" value="KI">کیش ایر</li>
+                                            <li><input type="checkbox" value="KA">کاسپین</li>
+                                            <li><input type="checkbox" value="ZA">زاگرس</li>
+                                            <li><input type="checkbox" value="ME">معراج</li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="form-group-third">
                                     <label>بزرگسال</label>
-                                    <select id="amadeus-adult" id="amadeus-adult">
+                                    <select id="amadeus-adult">
                                         <?php for ($i = 1; $i < 10; $i++) { ?>
                                             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                         <?php } ?>
@@ -170,7 +182,7 @@
                                 </div>
                                 <div class="form-group-third">
                                     <label>کودک</label>
-                                    <select id="amadeus-child" id="amadeus-child">
+                                    <select id="amadeus-child">
                                         <?php for ($i = 0; $i < 6; $i++) { ?>
                                             <option value="<?php echo $i ?>"><?php echo $i ?></option>
                                         <?php } ?>
@@ -178,7 +190,7 @@
                                 </div>
                                 <div class="form-group-third">
                                     <label>نوزاد</label>
-                                    <select id="amadeus-infant" id="amadeus-infant">
+                                    <select id="amadeus-infant">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
                                     </select>
@@ -189,6 +201,7 @@
                             </form>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
                 <!--charter result-->
                 <div class="row" id="charter-domestic-oneway-result">
@@ -283,7 +296,6 @@
                                         <th>ظرفیت</th>
                                         <th>کلاس قیمت</th>
                                         <th>قیمت(تومان)</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody id="liaison-result-content">
@@ -292,6 +304,33 @@
                         </form>
                     </div>
                 </div>
+                <div class="row" id="liaison-result-show-departure">
+                    <div class="result-show">
+                        <form method="post" action="<?php echo base_url(); ?>index.php/flight/start_reserve">
+                            <header id="liaison-result-header-departure" class="accordion"></header>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>ردیف</th>
+                                        <th>مبداء</th>
+                                        <th>مقصد</th>
+                                        <th>ایرلاین</th>
+                                        <th>شماره پرواز</th>
+                                        <th>ساعت حرکت</th>
+                                        <th>ساعت فرود</th>
+                                        <th>ظرفیت</th>
+                                        <th>کلاس قیمت</th>
+                                        <th>قیمت(تومان)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="liaison-result-content-departure">
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <a href="#" class="liaison-result-submit transition-effect">ادامه</a>
                 <!--amadeus result-->
                 <div class="row" id="amadeus-result-show">
                     <div class="result-show">
@@ -331,9 +370,9 @@
                         <div class="full-address">
                             نشانی  : مشهد ، خیابان خسروی ، نرسیده به چهارراه خسروی ، جنب هتل سخاوت
                             <br>
-                            تلفن : 051-32222982
+                            تلفن : 32222982-051
                             <br>
-                            فکس : 051-32217100
+                            فکس : 32217100-051
                             <br>
                             پشتیبانی رزرواسیون : 09151151960
                         </div>
@@ -503,33 +542,58 @@
             } else {
                 show_liaison(result);
             }
-
         });
     }
 
     function show_liaison(result) {
         $('.loading').hide();
-        console.log('test:', result);
         var res = result.result;
         var obj;
         var j = 1;
-        $('#liaison-result-show').fadeIn();
         $('#liaison-result-content').html('');
         $('#liaison-result-header').html('');
-        var liaison_departure_date = $('#liaison-direct-date').val();
+        $('#liaison-result-content-departure').html('');
+        $('#liaison-result-header-departure').html('');
+        var liaison_flight_type = $("#liaison-flight-type").val();
+        if (liaison_flight_type == 0) {
+            $("#liaison-result-show-departure").hide();
+        }
+        var liaison_departure_date = $('#liaison-departure-date').val();
+        var liaison_arrival_date = $('#liaison-return-date').val();
         var liaison_from_city = $('#liaison-from-city').val().split('|')[1].trim();
         var liaison_to_city = $('#liaison-to-city').val().split('|')[1].trim();
+        var liaison_from_city_iata = $('#liaison-from-city').val().split('|')[0].trim();
+        var liaison_to_city_iata = $('#liaison-to-city').val().split('|')[0].trim();
         var liaison_adult = $("#liaison-adult").val();
         var liaison_child = $("#liaison-child").val();
         var liaison_infant = $("#liaison-infant").val();
-        if (result.result === 0 || result.result === undefined) {
-            $('#liaison-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
-            $('#liaison-result-header').append('پرواز چارتری (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
+        if (res.length === 0 || result.result === undefined) {
+            if (liaison_flight_type == 0) {
+                $("#liaison-result-show").show();
+                $('#liaison-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+                $('#liaison-result-header').append('پرواز چارتری (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
+            } else if (liaison_flight_type == 1) {
+                $("#liaison-result-show").show();
+                $("#liaison-result-show-departure").show();
+                $('#liaison-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+                $('#liaison-result-header').append('پرواز چارتری (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
+                $('#liaison-result-content-departure').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+                $('#liaison-result-header-departure').append('پرواز چارتری (' + liaison_to_city + ' - ' + liaison_from_city + ')' + ' - ' + liaison_arrival_date);
+            }
         } else {
+            $(".liaison-result-submit").show();
             $('#liaison-result-header').append('پرواز سیستمی داخلی (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
+            $('#liaison-result-header-departure').append('پرواز سیستمی داخلی (' + liaison_to_city + ' - ' + liaison_from_city + ')' + ' - ' + liaison_arrival_date);
             for (var i = 0; i < res.length; i++, j++) {
                 obj = res[i];
-                $('#liaison-result-content').append('<tr><td><input type="radio" name="flight_key[]" class="flight-key" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"></td><input type="hidden" name="child" value="' + liaison_child + '"></td><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + j + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td><td><button class="liaison-result-submit">ادامه</button></td></tr></tr>');
+                if (obj.from_city_iata == liaison_from_city_iata) {
+                    $('#liaison-result-show').fadeIn();
+                    $('#liaison-result-content').append('<tr><td><input type="radio" name="flight_key[]" class="flight-key" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"></td><input type="hidden" name="child" value="' + liaison_child + '"></td><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + j + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td></tr></tr>');
+                }
+                if (obj.from_city_iata == liaison_to_city_iata) {
+                    $('#liaison-result-show-departure').fadeIn();
+                    $('#liaison-result-content-departure').append('<tr><td><input type="radio" name="flight_key[]" class="flight-key" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"></td><input type="hidden" name="child" value="' + liaison_child + '"></td><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + j + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td></tr></tr>');
+                }
             }
         }
     }
@@ -539,15 +603,13 @@
             "liaison-flight-type": $("#liaison-flight-type").val(),
             "liaison-from-city": $("#liaison-from-city").val().split('|')[0],
             "liaison-to-city": $("#liaison-to-city").val().split('|')[0],
-            "liaison-direct-date": $("#liaison-direct-date").val(),
             "liaison-departure-date": $("#liaison-departure-date").val(),
-            "liaison-arrival-date": $("#liaison-arrival-date").val(),
+            "liaison-return-date": $("#liaison-return-date").val(),
             "liaison-adult": $("#liaison-adult").val(),
             "liaison-child": $("#liaison-child").val(),
             "liaison-infant": $("#liaison-infant").val()
         };
         console.log('searching', p);
-        console.log('zart', "<?php echo base_url(); ?>index.php/liaison/show_liaison_flight")
         $('.loading').show();
         $.getJSON("<?php echo base_url(); ?>index.php/liaison/show_liaison_flight", p, function (result) {
             console.log('result:', result);
@@ -597,12 +659,17 @@
 
         });
     }
+
     function search_amadeus() {
         var p = {
             'amadeus-from-city': $('#amadeus-from-city').val().split('|')[0].trim(),
             'amadeus-to-city': $('#amadeus-to-city').val().split('|')[0].trim(),
-            'amadeus-departure-date': $('#amadeus-departure-date').val(),
-            'amadeus-return-date': $('#amadeus-return-date').val(),
+            'amadeus-departure-date': jalali_to_gregorian($('#amadeus-departure-date').val()),
+            'amadeus-return-date': jalali_to_gregorian($('#amadeus-return-date').val()),
+            'amadeus-airline-iata': $("select[name='amadeus-airline-iata[]']")
+                    .map(function () {
+                        return $(this).val();
+                    }).get(),
             'amadeus-adult': $('#amadeus-adult').val(),
             'amadeus-child': $('#amadeus-child').val(),
             'amadeus-infant': $('#amadeus-infant').val()

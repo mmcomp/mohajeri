@@ -53,6 +53,7 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <!--<div style="text-align: center;color: red;background: #eaeaea;" class="transition-effect">در دست بروزرسانی . . .</div>-->
                             <a href="#" class="transition-effect" id="public-login-btn">ورود عمومی</a>
                         </div>
                         <div class="form-group">

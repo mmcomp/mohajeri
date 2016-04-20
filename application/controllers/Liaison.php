@@ -20,12 +20,12 @@ class Liaison extends CI_Controller {
         $infant_count = (int) $_REQUEST['liaison-infant'];
         $pcount = $adult_count + $child_count;
         if ((int) $flight_type == 0) {
-            $departure_date = $this->set_date($_REQUEST['liaison-direct-date']);
+            $departure_date = $this->set_date($_REQUEST['liaison-departure-date']);
 
             $arriaval_date = '';
         } else {
             $departure_date = $this->set_date($_REQUEST['liaison-departure-date']);
-            $arriaval_date = $this->set_date($_REQUEST['liaison-arrival-date']);
+            $arriaval_date = $this->set_date($_REQUEST['liaison-return-date']);
         }
         $data['out'] = $this->liaison_model->get_liaison_flight($from_city, $to_city, $departure_date, $arriaval_date, $pcount);
         $this->load->view('ajax_result', $data);
@@ -33,7 +33,11 @@ class Liaison extends CI_Controller {
 
     public function show_liaison_result() {
         $airlines_array = array(
-            "IR"
+            "IR",
+            "I3",
+//            "HH",
+            "EP",
+            "IV"
         );
         $airlines = "'".implode("','", $airlines_array)."'";
         $out = array(
@@ -45,10 +49,12 @@ class Liaison extends CI_Controller {
             $from_city = array();
             $to_city = array();
             $fdate = array();
+//            echo "SELECT * FROM source_update WHERE Id IN (" . implode(',', $id) . ") ";
             $query = $this->db->query("SELECT * FROM source_update WHERE Id IN (" . implode(',', $id) . ") ");
             $id_result = $query->result_array();
             $result_ok = TRUE;
             foreach ($id_result as $row) {
+//                var_dump($row);
                 $from_city[] = $row['from_city'];
                 $to_city[] = $row['to_city'];
                 $fdate[] = $row['tarikh'];

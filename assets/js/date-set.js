@@ -15,6 +15,22 @@ function gregorian_to_jalali(date)
     return tmpTr;
 }
 
+function gregorian_to_jalali2(date)
+{
+    var tmpTr = date.split('-');
+    var Y = parseInt(tmpTr[0], 10);
+    var D = parseInt(tmpTr[2], 10);
+    var m = parseInt(tmpTr[1], 10);
+    if (D > Y)
+    {
+        Y = parseInt(tmpTr[2]);
+        D = parseInt(tmpTr[0]);
+    }
+    tmpTr = gtj(Y, m, D, '');
+    tmpTr = tmpTr.replace(/\//g, '-');
+    return tmpTr;
+}
+
 //set for jtg
 function jalali_to_gregorian(date)
 {

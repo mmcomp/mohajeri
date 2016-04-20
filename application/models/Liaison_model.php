@@ -26,16 +26,16 @@ class Liaison_model extends CI_Model {
 
     public function sendRequest($request_id, $from_city, $to_city, $date, $pcount, $airline = 'IR') {
         $id = -1;
-        $q = $this->db->query("SELECT id,TIME_TO_SEC(TIMEDIFF(last_update,NOW()))/60 tdif FROM source_update where from_city = '$from_city' and to_city = '$to_city' and date(tarikh) = '$date'");
+        $q = $this->db->query("SELECT id,TIME_TO_SEC(TIMEDIFF(NOW(),last_update))/60 tdif FROM source_update where from_city = '$from_city' and to_city = '$to_city' and date(tarikh) = '$date'");
         $result = $q->result_array();
         if (count($result) > 0) {
             $id = $result[0]['id'];
         }
-        if (count($result) > 0 ){//&& $result[0]['tdif'] > 5) {
+        if (count($result) > 0 && $result[0]['tdif'] > 5) {
             $this->db->query("delete from flight1 where from_city = '$from_city' and to_city = '$to_city' and date(fdate) = '$date'");
-            $this->db->query("UPDATE source_update set stat = 2 , last_update = NOW() where id = " . $result[0]['id']);
+            $this->db->query("UPDATE source_update set stat = 2 , last_update = NOW() where id = $id" );
             $this->db->query("INSERT INTO RB_Request (request,source_id,stat) values ('A[{\"ID\":\"$id\"}]',1,0)");
-        } else {//if (count($result) == 0) {
+        } else if (count($result) == 0) {
             $this->db->query("delete from flight1 where from_city = '$from_city' and to_city = '$to_city' and date(fdate) = '$date'");
             $this->db->query("INSERT INTO source_update (from_city,to_city,tarikh,last_update,stat,source_id) values ('$from_city','$to_city','$date',NOW(),2,1)");
             $id = $this->db->insert_id();
@@ -45,7 +45,7 @@ class Liaison_model extends CI_Model {
     }
 
     public function insert_reserve($liaison_adult, $liaison_child, $liaison_infant, $flight_key, $refrence_id) {
-        $this->db->query("INSERT INTO reserve_tmp (tflight,adl,chd,inf,refrence_id,source_id) VALUES ('$flight_key', '$liaison_adult', '$liaison_child', '$liaison_infant',$refrence_id,1)");
+        $this->db->query("INSERT INTO reserve_tmp (tflight,adl,chd,inf,refrence_id,source_id,state) VALUES ('$flight_key', '$liaison_adult', '$liaison_child', '$liaison_infant',$refrence_id,1,1)");
         return $this->db->insert_id();
     }
 

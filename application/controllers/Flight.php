@@ -53,7 +53,7 @@ class Flight extends CI_Controller {
         $flight_info = $data['flight_info'];
         $total_price = 0;
         foreach ($flight_info as $row) {
-            $price = $row['price'];
+            $price = $row[0]['price'];
             $adl_price = $adl * $price;
             $child_price = $chd * $price * 0.5;
             $infant_price = $inf * $price * 0.1;

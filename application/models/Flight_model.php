@@ -10,19 +10,20 @@ class Flight_model extends CI_Model {
         $out = array();
         if ($flight_type == 1) {
             // Liaison
-            $query = $this->db->query("select from_city,to_city,price,fdate,ftime,ltime,class_ghimat from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where flight1.tflight = '$flight_id'");
+            $query = $this->db->query("select from_city,to_city,price,fdate,ftime,ltime,class_ghimat,flight_number,airline from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where flight1.tflight = '$flight_id'");
             $out = $query->result_array();
         }
         return $out;
     }
 
     function get_flight_refrence($refrence_id) {
-        $query = $this->db->query("select tflight,id from reserve_tmp where refrence_id = $refrence_id");
+        $query = $this->db->query("select tflight,id,voucher_id from reserve_tmp where refrence_id = $refrence_id");
         $result = $query->result_array();
         $out = array("flight_info" => array(), "reserve_tmp" => array());
         foreach ($result as $tmp) {
             $out["flight_info"][] = $this->get_flight($tmp['tflight'], 1);
             $out['reserve_tmp'][] = $tmp['id'];
+            $out['voucher_id'][] = $tmp['voucher_id'];
         }
         return $out;
     }
@@ -59,7 +60,7 @@ class Flight_model extends CI_Model {
             $reserve_tmp = $res['id'];
             $req = 'C[{"Id":"' . $reserve_tmp . '", "FlightNo":"' . $res['flight_number'] . '", "From_City":"' . $res['from_city'] . '", "To_City":"' . $res['to_city'] . '", "PCount":"' . $res['pcount'] . '", "Date":"' . date("dM", strtotime($res['fdate'])) . '", "Airline":"' . $res['airline'] . '", "S1":"2", "S2":"4"}]';
             //Test is 5 change into to 0 for real
-            $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,5)");
+            $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
         }
     }
 
@@ -98,7 +99,7 @@ class Flight_model extends CI_Model {
     }
 
     public function liaison_payment($refrence_id, $total_price) {
-        $query = $this->db->query("SELECT refrence_id FROM payment");
+        $query = $this->db->query("SELECT refrence_id FROM payment WHERE refrence_id = '$refrence_id'");
         $check_refrence_id = $query->result_array();
         if (empty($check_refrence_id)) {
             $this->db->query("INSERT INTO payment (refrence_id, total) VALUES ('$refrence_id', '$total_price')");

@@ -48,10 +48,8 @@ class Payment extends CI_Controller {
             $this->load->view("ticket", $data);
         } else {
             //Load a view to show error and send back to default page
-            echo "Payment Unsuccessful : <br/>\n$State [$StateCode]";
             $data['error'] = $State;
-            if($StateCode==-1)
-            {
+            if ($StateCode == -1) {
                 $data['error'] = "انصراف از پرداخت";
             }
             $this->load->view('error_page', $data);

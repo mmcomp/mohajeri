@@ -15,7 +15,6 @@ html {
 }
 
 body {
-    background-color: #eeeeee;
     height: 100%;
 }
 
@@ -89,6 +88,29 @@ body {
 .loading img {
     max-width: 100%;
     margin: 350px 0;
+}
+
+.alert-box {
+    background-color: #ff4343;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 2%;
+}
+
+.alert-box a {
+    display: block;
+    line-height: 35px;
+    background-color: #43a047;
+    color: #fff;
+    text-decoration: none;
+    width: 100px;
+    margin: 10px auto 0 auto;
+}
+
+.alert-box a:hover {
+    background-color: #2e7d32;
 }
 
 @font-face {
@@ -204,7 +226,6 @@ body {
     color: #fff;
 }
 
-
 /*======== let's begin (result-page) ========*/
 
 .main-header-box {
@@ -231,7 +252,7 @@ body {
 }
 
 .image-cover {
-    background: url(../images/entry-bg.jpg) top;
+    background: url(../images/entry-bg.jpg) no-repeat fixed;
     background-size: cover;
 }
 
@@ -312,7 +333,7 @@ select option {
 
 .result-show {
     width: 100%;
-    margin-top: 40px;
+    background-color: #eee;
 }
 
 .result-show header {
@@ -329,6 +350,7 @@ select option {
     border: 1px solid #d7d7d7;
     text-align: center;
     border-spacing: 0;
+    background: #eeeeee;
 }
 
 .result-show table tr:nth-last-of-type(even) {
@@ -342,9 +364,54 @@ select option {
 }
 
 .liaison-result-submit {
-    background-color: transparent;
-    cursor: pointer;
-    color: #0a9400;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #0a9400;
+}
+
+.liaison-result-submit:hover {
+    background-color: #2e7d32;
+}
+
+.airline-box {
+    position: relative;
+}
+
+.airline-box input[type="text"] {
+    height: 37px;
+    background-color: #fff;
+    border: 1px solid #a7a7a7;
+    box-shadow: inset 0 3px 8px #d8d8d8;
+
+}
+
+.airline-box ul {
+    width: 100%;
+    height: 148px;
+    overflow-y: scroll;
+    position: absolute;
+    list-style: none;
+    top: 37px;
+    right: 0;
+    box-sizing: initial;
+    z-index: 999;
+}
+
+.airline-box ul li {
+    padding: 0;
+    line-height: 37px;
+    display: block;
+    background-color: #fff;
+    color: #333;
+}
+
+.airline-box ul li input {
+    float: right;
+    margin: 10px 10px;
 }
 
 .accordion {
@@ -352,7 +419,7 @@ select option {
 }
 
 .tour {
-    margin-top: 20px;
+    background: #eeeeee;
 }
 
 .tour ul {
@@ -362,8 +429,7 @@ select option {
 
 .tour ul li {
     width: 15%;
-    margin: 0 4% 20px 4%;
-    padding: 1%;
+    margin: 40px 4%;
     display: inline-block;
 }
 
@@ -382,6 +448,24 @@ select option {
 
 .tour ul li a {
     text-decoration: none;
+}
+
+.google-map {
+    width: 100%;
+    height: 350px;
+}
+
+.full-address {
+    padding: 10px;
+    color: #fff;
+}
+
+.address-box {
+    width: 90%;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 2% auto;
+    background: url(../images/box-bg.png);
 }
 
 .main-footer {
@@ -423,7 +507,6 @@ select option {
     display: block;
     width: 100%;
     height: 37px; 
-    margin-top: 30px;
     background-color: #43a047;
     text-decoration: none;
     text-align: center;
@@ -512,20 +595,19 @@ select option {
 
 .payment {
     width: 100%;
-    height: 400px;
-    background-color: #eee;
 }
 
 .payment header {
     padding: 20px;
     text-align: center;
     color: red;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .payment ul {
     list-style: none;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .payment ul li {
@@ -533,7 +615,7 @@ select option {
 }
 
 .payment ul li img {
-    width: 300px;
+    width: 150px;
 }
 
 .credit-form {
@@ -544,6 +626,15 @@ select option {
     left: 0;
     right: 0;
     margin: 0 auto;
+    z-index: 20;
+}
+
+.credit-form input::-webkit-input-placeholder {
+    color: red;
+}
+
+.passenger-form input::-webkit-input-placeholder {
+    color: red;
 }
 
 .credit-form header {
@@ -564,11 +655,20 @@ select option {
     background-color: #43a047;
     cursor: pointer;
     color: #fff;
-    margin-top: 30px;
 }
 
 .credit-form input[type="submit"]:hover {
     background-color: #2e7d32;
+}
+
+.page-color {
+    background-color: #000;
+    opacity: .8;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
 }
 
 @media screen and (max-width: 992px) {
@@ -602,11 +702,13 @@ select option {
     }
 
     .search-box {
+        width: 100%;
         padding: 0;
     }
 
-    .search-box {
+    .address-box {
         width: 100%;
+        margin: 0;
     }
 
     .agency-filter {
@@ -735,10 +837,6 @@ select option {
 
     .result-show table td:nth-last-of-type(2):before {
         content: 'قیمت';
-    }
-
-    .result-show table td:nth-last-of-type(1):before {
-        content: '.';
     }
 
     .result-show table td {
