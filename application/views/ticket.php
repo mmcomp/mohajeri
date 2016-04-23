@@ -128,58 +128,73 @@ $refrence_id = $out['refrence_id'];
                     $.getJSON("<?php echo base_url(); ?>index.php/flight/confirm_etebari_result", p, function (result) {
                         //                        console.log(result);
                         var not_ready = false;
+                        var error_happend = false;
                         for (var i = 0; i < result.stat.length; i++)
                         {
-                            if (result.stat[i].result == 0 || (result.stat[i].result != 0 && result.data.tickets[0].ticket_number2 == ''))
+                            if (result.stat[i].result == 0 || (result.stat[i].result == 1 && result.data.tickets[0].ticket_number2 == ''))
                             {
                                 not_ready = true;
                             }
+                            else if (result.stat[i].result != 0 && result.stat[i].result != 1) {
+                                error_happend = true;
+                            }
                         }
-                        if (result.stat.length === 0)
+                        if (error_happend)
                         {
-                            not_ready = true;
-                        }
-                        if (not_ready)
-                        {
-                            console.log('Not Ready');
-                            setTimeout(function () {
-                                check_confirm();
-                            }, 500);
+                            ///ERROR Happened
                         }
                         else
                         {
-                            $(".loading").hide();
-                            var data = result.data;
-                            //                            console.log('Ready',data);
-                            var voucher_ids = data.voucher_id;
-                            var tickets = data.tickets;
-                            var flight_infos = data.flight_info;
-                            var ticket, flight_info, voucher_id;
-                            // Tickets
-                            console.log('TICKETS : ');
-                            for (var i = 0; i < tickets.length; i++)
+                            if (result.stat.length === 0)
                             {
-                                voucher_id = voucher_ids[i];
-                                ticket = tickets[i];
-                                console.log(ticket);
-                                $(".flight-content tr").append('<th>' + voucher_id + '</th><th>' + tickets[i].ticket_number2 + '</th>');
-                                $(".passenger-title").append('<tr><th>جنسیت</th><th>نام مسافر</th><th>شماره ملی</th><th>تاریخ تولد</th></tr>');
-                                if (tickets[i].gender == 1) {
-                                    var gender = 'Mr';
-                                } else {
-                                    var gender = 'Miss';
-                                }
-                                $(".passenger-content").append('<tr><td>' + gender + '</td><td>' + tickets[i].lname_en + ' - ' + tickets[i].fname_en + '</td><td>' + tickets[i].shomare_melli + '</td><td>' + tickets[i].birthday + '</td></tr>');
+                                not_ready = true;
                             }
-                            // Flights
-                            console.log('FLIGHTS : ');
-                            for (var i = 0; i < flight_infos.length; i++)
+                            if (not_ready)
                             {
-                                flight_info = flight_infos[i];
-                                voucher_id = voucher_ids[i];
-                                console.log(flight_info, voucher_id);
-                                $(".flight-title").append('<tr><th>وچر</th><th>شماره بلیط</th><th>مبدا</th><th>مقصد</th><th>نام خط هوایی</th><th>شماره پرواز</th><th>تاریخ شمسی</th><th>تاریخ میلادی</th><th>ساعت پرواز</th></tr>');
-                                $(".flight-content tr").append('<td>' + flight_info[i].from_city + '</td><td>' + flight_info[i].to_city + '</td><td>' + flight_info[i].airline + '</td><td>' + flight_info[i].flight_number + '</td><td>' + gregorian_to_jalali2(flight_info[i].fdate) + '</td><td>' + flight_info[i].fdate + '</td><td>' + flight_info[i].ftime + '</td>');
+                                console.log('Not Ready');
+                                setTimeout(function () {
+                                    check_confirm();
+                                }, 500);
+                            }
+                            else
+                            {
+                                $(".loading").hide();
+                                var data = result.data;
+                                //                            console.log('Ready',data);
+                                var voucher_ids = data.voucher_id;
+                                var tickets = data.tickets;
+                                var flight_infos = data.flight_info;
+                                var ticket, flight_info, voucher_id;
+                                // Flights
+                                console.log('FLIGHTS : ');
+                                for (var i = 0; i < flight_infos.length; i++)
+                                {
+                                    flight_info = flight_infos[i];
+                                    voucher_id = voucher_ids[i];
+                                    console.log(flight_info, voucher_id);
+
+
+                                    // Tickets
+                                    console.log('TICKETS : ');
+                                    for (var i = 0; i < tickets.length; i++)
+                                    {
+                                        voucher_id = voucher_ids[i];
+                                        ticket = tickets[i];
+                                        console.log(ticket);
+                                        $(".flight-content tr").append('<th>' + voucher_id + '</th><th>' + tickets[i].ticket_number2 + '</th>');
+                                        $(".passenger-title").append('<tr><th>جنسیت</th><th>نام مسافر</th><th>شماره ملی</th><th>تاریخ تولد</th></tr>');
+                                        if (tickets[i].gender == 1) {
+                                            var gender = 'Mr';
+                                        } else {
+                                            var gender = 'Miss';
+                                        }
+                                        $(".passenger-content").append('<tr><td>' + gender + '</td><td>' + tickets[i].lname_en + ' - ' + tickets[i].fname_en + '</td><td>' + tickets[i].shomare_melli + '</td><td>' + tickets[i].birthday + '</td></tr>');
+                                    }
+
+
+                                    $(".flight-title").append('<tr><th>وچر</th><th>شماره بلیط</th><th>مبدا</th><th>مقصد</th><th>نام خط هوایی</th><th>شماره پرواز</th><th>تاریخ شمسی</th><th>تاریخ میلادی</th><th>ساعت پرواز</th></tr>');
+                                    $(".flight-content tr").append('<td>' + flight_info[i].from_city + '</td><td>' + flight_info[i].to_city + '</td><td>' + flight_info[i].airline + '</td><td>' + flight_info[i].flight_number + '</td><td>' + gregorian_to_jalali2(flight_info[i].fdate) + '</td><td>' + flight_info[i].fdate + '</td><td>' + flight_info[i].ftime + '</td>');
+                                }
                             }
                         }
                     });

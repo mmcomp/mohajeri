@@ -113,13 +113,13 @@ function jtg(j_y, j_m, j_d, choice) {
         j_day_no += j_days_in_month[i];
     j_day_no += jd;
     g_day_no = j_day_no + 79;
-    gy = 1600 + 400 * Math.floor((g_day_no) / (146097)); /* 146097 = 365*400 + 400/4 - 400/100 + 400/400 */
+    gy = 1600 + 400 * Math.floor((g_day_no) / (146097));
     g_day_no = g_day_no % 146097;
     leap = 1;
-    if (g_day_no >= 36525) /* 36525 = 365*100 + 100/4 */
+    if (g_day_no >= 36525)
     {
         g_day_no--;
-        gy += 100 * Math.floor((g_day_no) / (36524)); /* 36524 = 365*100 + 100/4 - 100/100 */
+        gy += 100 * Math.floor((g_day_no) / (36524));
         g_day_no = g_day_no % 36524;
 
         if (g_day_no >= 365)
@@ -127,7 +127,7 @@ function jtg(j_y, j_m, j_d, choice) {
         else
             leap = 0;
     }
-    gy += 4 * Math.floor((g_day_no) / (1461)); /* 1461 = 365*4 + 4/4 */
+    gy += 4 * Math.floor((g_day_no) / (1461));
     g_day_no %= 1461;
     if (g_day_no >= 366) {
         leap = 0;

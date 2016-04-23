@@ -377,41 +377,18 @@ select option {
     background-color: #2e7d32;
 }
 
-.airline-box {
-    position: relative;
-}
-
-.airline-box input[type="text"] {
-    height: 37px;
-    background-color: #fff;
-    border: 1px solid #a7a7a7;
-    box-shadow: inset 0 3px 8px #d8d8d8;
-
-}
-
-.airline-box ul {
-    width: 100%;
-    height: 148px;
-    overflow-y: scroll;
-    position: absolute;
-    list-style: none;
-    top: 37px;
-    right: 0;
-    box-sizing: initial;
-    z-index: 999;
-}
-
-.airline-box ul li {
-    padding: 0;
-    line-height: 37px;
+.amadeus-result-submit {
     display: block;
-    background-color: #fff;
-    color: #333;
+    width: 100%;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #0a9400;
 }
 
-.airline-box ul li input {
-    float: right;
-    margin: 10px 10px;
+.amadeus-result-submit:hover {
+    background-color: #2e7d32;
 }
 
 .accordion {
@@ -795,50 +772,50 @@ select option {
         width: 100px;
     }
 
-    .result-show table td:nth-last-of-type(12):before {
+    .result-show table td:nth-last-of-type(11):before {
         content: 'انتخاب';
     }
 
-    .result-show table td:nth-last-of-type(11):before {
+    .result-show table td:nth-last-of-type(10):before {
         content: 'ردیف';
     }
 
-    .result-show table td:nth-last-of-type(10):before {
+    .result-show table td:nth-last-of-type(9):before {
         content: 'مقصد';
     }
 
-    .result-show table td:nth-last-of-type(9):before {
+    .result-show table td:nth-last-of-type(8):before {
         content: 'مبدا';
     }
 
-    .result-show table td:nth-last-of-type(8):before {
+    .result-show table td:nth-last-of-type(7):before {
         content: 'ایرلاین';
     }
 
-    .result-show table td:nth-last-of-type(7):before {
+    .result-show table td:nth-last-of-type(6):before {
         content: 'شماره پرواز';
     }
 
-    .result-show table td:nth-last-of-type(6):before {
+    .result-show table td:nth-last-of-type(5):before {
         content: 'ساعت حرکت';
     }
 
-    .result-show table td:nth-last-of-type(5):before {
+    .result-show table td:nth-last-of-type(4):before {
         content: 'ساعت فرود';
     }
 
-    .result-show table td:nth-last-of-type(4):before {
+    .result-show table td:nth-last-of-type(3):before {
         content: 'ظرفیت';
     }
 
-    .result-show table td:nth-last-of-type(3):before {
+    .result-show table td:nth-last-of-type(2):before {
         content: 'کلاس نرخی';
     }
 
-    .result-show table td:nth-last-of-type(2):before {
+    .result-show table td:nth-last-of-type(1):before {
         content: 'قیمت';
     }
-
+    
     .result-show table td {
         border-bottom: 1px solid #959595;
     }

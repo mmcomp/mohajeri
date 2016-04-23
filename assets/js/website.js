@@ -136,16 +136,7 @@ $(document).ready(function () {
         }
     });
 
-    //charter submit
-    $("#charter-result-show").hide();
-    $("#charter-submit").on("click", function () {
-        search_charter();
-    });
-
     //liaison submit
-    $(".liaison-result-submit").hide();
-    $("#liaison-result-show").hide();
-    $("#liaison-result-show-departure").hide();
     $("#liaison-submit").on("click", function () {
         search_liaison();
     });
@@ -156,7 +147,6 @@ $(document).ready(function () {
     });
 
     //amadeus airlines
-    $(".airline-box ul").hide();
     $(".airline-box").on("click", function () {
         $(".airline-box ul").fadeIn();
     });
@@ -171,16 +161,19 @@ $(document).ready(function () {
     $("#charter-domestic-departure-result").hide();
     $("#charter-domestic-return-result").hide();
     $("#liaison-result-show").hide();
+    $("#liaison-result-show-departure").hide();
     $("#amadeus-result-show").hide();
-
-    //charter result submit
-    $(".charter-result-submit").on("click", function () {
-        $("#charter-domestic-oneway-result form").submit();
-    });
+    $(".liaison-result-submit").hide();
+    $(".amadeus-result-submit").hide();
 
     //liaison result submit
     $(".liaison-result-submit").on("click", function () {
-        $("#liaison-result-show form").submit();
+        $("#liaison-result-show-form").submit();
+    });
+    
+    //amadeus result submit
+    $(".amadeus-result-submit").on("click", function () {
+        $("#amadeus-result-show-form").submit();
     });
 
     //accordion

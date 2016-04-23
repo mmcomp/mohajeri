@@ -7,6 +7,7 @@ class Flight extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('liaison_model');
+        $this->load->model('amadeus_model');
         $this->load->model('flight_model');
     }
 
@@ -23,7 +24,6 @@ class Flight extends CI_Controller {
         $chd = $this->input->post('child');
         $inf = $this->input->post('infant');
         if (isset($_SESSION['refrence_id'])) {
-            //Liason
             $refrence_id = $_SESSION['refrence_id'];
             $data['test'] = $tmp = $this->flight_model->get_flight_refrence($refrence_id);
             $data['flight_info'] = $tmp['flight_info'];
@@ -36,14 +36,20 @@ class Flight extends CI_Controller {
 
             $refrence_id = $this->create_refrence();
             $_SESSION['refrence_id'] = $refrence_id;
+            $data['adult'] = $adl;
+            $data['child'] = $chd;
+            $data['infant'] = $inf;
             foreach ($flights as $i => $flight_id) {
 
                 if ($flight_types[$i] == 1) {
                     //Liason
                     $reserve_tmp = $this->liaison_model->insert_reserve($adl, $chd, $inf, $flight_id, $refrence_id);
-                    $data['adult'] = $adl;
-                    $data['child'] = $chd;
-                    $data['infant'] = $inf;
+                    $data['refrence_id'] = $refrence_id;
+                    $data['reserve_tmp'][] = $reserve_tmp;
+                    $data['flight_info'][] = $this->flight_model->get_flight($flight_id, $flight_types[$i]);
+                } elseif ($flight_types[$i] == 2) {
+                    //Amadeus
+                    $reserve_tmp = $this->amadeus_model->insert_reserve($adl, $chd, $inf, $flight_id, $refrence_id);
                     $data['refrence_id'] = $refrence_id;
                     $data['reserve_tmp'][] = $reserve_tmp;
                     $data['flight_info'][] = $this->flight_model->get_flight($flight_id, $flight_types[$i]);
@@ -59,7 +65,12 @@ class Flight extends CI_Controller {
             $infant_price = $inf * $price * 0.1;
             $total_price += $adl_price + $child_price + $infant_price;
         }
-        $this->flight_model->liaison_payment($refrence_id, $total_price);
+//        echo "REQUEST :<br/>\n";
+//        var_dump($_REQUEST);
+//        echo "DATA :<br/>\n";
+//        var_dump($data);
+//        exit();
+        $this->flight_model->payment($refrence_id, $total_price);
         $this->load->view('reserve', $data);
     }
 

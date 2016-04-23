@@ -23,20 +23,45 @@
                 </div>
                 <div class="reserve-summery">
                     <header>خلاصه رزرو</header>
-                    <ul>
-                        <?php
-                        $i = 0;
-                        foreach ($flight_info as $row) {
-                            ?>
-                            <li><?php echo $row[$i]['to_city']; ?> به <?php echo $row[$i]['from_city']; ?></li>
-                            <li>در تاریخ : <?php echo $row[$i]['fdate']; ?></li>
-                            <li>کلاس قیمتی : <?php echo $row[$i]['class_ghimat']; ?></li>
-                            <li>قیمت (بزرگسال) : <?php echo $row[$i]['price']; ?> ریال</li>
-                            <li>قیمت (کودک) : <?php echo $row[$i]['price'] * .5; ?> ریال</li>
-                            <li>قیمت (نوزاد) : <?php echo $row[$i]['price'] * .1; ?> ریال</li>
-                            <li>قیمت (کل) : <?php echo $row[$i]['price']; ?></li>
-                        <?php } ?>
-                    </ul>
+                    <?php
+                    $i = 0;
+                    foreach ($flight_info as $row) {
+                        ?>
+                        <ul>
+                            <li>
+                                شماره پرواز : 
+                                <?php echo $row[$i]['flight_number']; ?>
+                            </li>
+                            <li>
+                                تاریخ پرواز : 
+                                <?php echo $row[$i]['fdate']; ?>
+                            </li>
+                            <li>
+                                مبداء : 
+                                <?php echo $row[$i]['from_city']; ?>
+                            </li>
+                            <li>
+                                مقصد : 
+                                <?php echo $row[$i]['to_city']; ?>
+                            </li>
+                            <li>
+                                کلاس نرخی : 
+                                <?php echo $row[$i]['class_ghimat']; ?>
+                            </li>
+                            <li>
+                                قیمت بزرگسال: 
+                                <?php echo $row[$i]['price']; ?> ریال
+                            </li>
+                            <li>
+                                قیمت کودک: 
+                                <?php echo $row[$i]['price'] * 0.5; ?> ریال
+                            </li>
+                            <li>
+                                قیمت نوزاد: 
+                                <?php echo $row[$i]['price'] * 0.1; ?> ریال
+                            </li>
+                        </ul>
+                    <?php } ?>
                 </div>
                 <div class="passenger-info">
                     <header>مشخصات مسافر</header>

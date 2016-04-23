@@ -17,7 +17,7 @@ class Amadeus extends CI_Controller {
         $amadeus_child = $this->input->get('amadeus-child');
         $amadeus_infant = $this->input->get('amadeus-infant');
         $amadeus_airline_iata = $this->input->get('amadeus-airline-iata');
-        $data['out'] = $this->amadeus_model->get_amadeus_flight($amadeus_from_city, $amadeus_to_city, $amadeus_departure_date, $amadeus_return_date, $amadeus_airline_iata);
+        $data['out'] = $this->amadeus_model->get_amadeus_flight($amadeus_from_city, $amadeus_to_city, $amadeus_departure_date, $amadeus_return_date, $amadeus_airline_iata,$this->input->get('amadeus-departure-date'),$this->input->get('amadeus-return-date'));
         $this->load->view('ajax_result', $data);
     }
     public function check_amadeus_result(){
@@ -25,10 +25,13 @@ class Amadeus extends CI_Controller {
             "result_ok" => FALSE,
             "result" => array()
         );
-        $rd_ids = $_REQUEST['ids'];
+        $g = $_REQUEST['ids'];
+        $rd_ids = array($g[0]["id"],$g[1]["id"]);
+        $s_ids = array($g[0]["sid"],$g[1]["sid"]);
         if (is_array($rd_ids)) {
 //            echo "SELECT stat FROM RB_AD_Request WHERE R_id IN (" . implode(',', $rd_ids) . ") ";
-            $query = $this->db->query("SELECT stat FROM RB_AD_Request WHERE R_id IN (" . implode(',', $rd_ids) . ") ");
+//            $query = $this->db->query("SELECT stat FROM RB_AD_Request WHERE R_id IN (" . implode(',', $rd_ids) . ") ");
+            $query = $this->db->query("SELECT stat FROM RB_Request WHERE id IN (" . implode(',', $rd_ids) . ") ");
             $id_result = $query->result_array();
             $result_ok = TRUE;
             foreach ($id_result as $row) {
@@ -41,7 +44,7 @@ class Amadeus extends CI_Controller {
                 //--------------TEST--------------------
 //                $id = array('63');
                 //--------------------------------------
-                $query = $this->db->query("SELECT * FROM am_flight_a  WHERE   Rd_Id IN (" . implode(',', $rd_ids) . ") order by Rd_Id");
+                $query = $this->db->query("SELECT * FROM am_flight_a  WHERE   Rd_Id IN (" . implode(',', $s_ids) . ") order by Rd_Id");
                 $out['result'] = $query->result_array();
             }
         }

@@ -12,6 +12,10 @@ class Flight_model extends CI_Model {
             // Liaison
             $query = $this->db->query("select from_city,to_city,price,fdate,ftime,ltime,class_ghimat,flight_number,airline from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where flight1.tflight = '$flight_id'");
             $out = $query->result_array();
+        } else if ($flight_type == 2) {
+            // Amadeus
+            $query = $this->db->query("select from_city_iata from_city,to_city_iata to_city,ghimat price,fdate,departure_time ftime,landing_time ltime,class class_ghimat,flight_number,am_flight_a.airline_iata airline from am_flight_a left join class_ghimat1 on (class_ghimat1.from_city=from_city_iata and class_ghimat1.to_city = to_city_iata and  class_ghimat1.airline_iata = am_flight_a.airline_iata and am_flight_a.class like concat(class_ghimat1.name,'%')) where am_flight_a.id = $flight_id order by class_ghimat1.id desc limit 1");
+            $out = $query->result_array();
         }
         return $out;
     }
@@ -54,13 +58,26 @@ class Flight_model extends CI_Model {
     }
 
     function confirm_reserve($refrence_id) {
-        $query = $this->db->query("select reserve_tmp.id,flight_number,from_city,to_city,adl+chd pcount,fdate,airline from reserve_tmp left join flight1 on (flight1.tflight=reserve_tmp.tflight) left join flight_extra on (flight1.tflight=flight_extra.tflight) where refrence_id = $refrence_id");
+        $query = $this->db->query("select `type` from reserve_tmp where refrence_id = $refrence_id");
         $result = $query->result_array();
-        foreach ($result as $res) {
-            $reserve_tmp = $res['id'];
-            $req = 'C[{"Id":"' . $reserve_tmp . '", "FlightNo":"' . $res['flight_number'] . '", "From_City":"' . $res['from_city'] . '", "To_City":"' . $res['to_city'] . '", "PCount":"' . $res['pcount'] . '", "Date":"' . date("dM", strtotime($res['fdate'])) . '", "Airline":"' . $res['airline'] . '", "S1":"2", "S2":"4"}]';
-            //Test is 5 change into to 0 for real
-            $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
+        if ($result[0]['type'] == 2) {
+            $query = $this->db->query("select reserve_tmp.id,flight_number,from_city_iata from_city,to_city_iata to_city,adl+chd pcount,fdate,aiarline_iata airline from reserve_tmp left join am_flight_a on (am_flight_a.id=reserve_tmp.tflight)  where refrence_id = $refrence_id");
+            $result = $query->result_array();
+            foreach ($result as $res) {
+                $reserve_tmp = $res['id'];
+                $req = 'C[{"Id":"' . $reserve_tmp . '", "FlightNo":"' . $res['flight_number'] . '", "From_City":"' . $res['from_city'] . '", "To_City":"' . $res['to_city'] . '", "PCount":"' . $res['pcount'] . '", "Date":"' . date("dM", strtotime($res['fdate'])) . '", "Airline":"' . $res['airline'] . '", "S1":"2", "S2":"4"}]';
+                //Test is 5 change into to 0 for real
+                $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
+            }
+        } elseif ($result[0]['type'] == 1) {
+            $query = $this->db->query("select reserve_tmp.id,flight_number,from_city,to_city,adl+chd pcount,fdate,airline from reserve_tmp left join flight1 on (flight1.tflight=reserve_tmp.tflight) left join flight_extra on (flight1.tflight=flight_extra.tflight) where refrence_id = $refrence_id");
+            $result = $query->result_array();
+            foreach ($result as $res) {
+                $reserve_tmp = $res['id'];
+                $req = 'C[{"Id":"' . $reserve_tmp . '", "FlightNo":"' . $res['flight_number'] . '", "From_City":"' . $res['from_city'] . '", "To_City":"' . $res['to_city'] . '", "PCount":"' . $res['pcount'] . '", "Date":"' . date("dM", strtotime($res['fdate'])) . '", "Airline":"' . $res['airline'] . '", "S1":"2", "S2":"4"}]';
+                //Test is 5 change into to 0 for real
+                $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
+            }
         }
     }
 
@@ -98,7 +115,7 @@ class Flight_model extends CI_Model {
         return $out;
     }
 
-    public function liaison_payment($refrence_id, $total_price) {
+    public function payment($refrence_id, $total_price) {
         $query = $this->db->query("SELECT refrence_id FROM payment WHERE refrence_id = '$refrence_id'");
         $check_refrence_id = $query->result_array();
         if (empty($check_refrence_id)) {
