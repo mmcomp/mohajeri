@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-group-half">
                                     <label>نوع پرواز</label>
-                                    <select id="charter-flight-type" id="charter-flight-type">
+                                    <select id="charter-flight-type">
                                         <option value="0">یک طرفه</option>
                                         <option value="1">دو طرفه</option>
                                     </select>
@@ -80,6 +80,10 @@
                                 </div>
                                 <div class="form-group">
                                     <a id="charter-submit" href="#" class="transition-effect">جستجو</a>
+                                    <a href="#" class="searching-btn" class="transition-effect" style="background-color: #ff4343;">
+                                        در حال جستجو
+                                        <img src="<?php echo base_url(); ?>assets/images/load-icon2.gif">
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -134,6 +138,10 @@
                                 </div>
                                 <div class="form-group">
                                     <a href="#" id="liaison-submit" class="transition-effect">جستجو</a>
+                                    <a href="#" class="searching-btn" class="transition-effect" style="background-color: #ff4343;">
+                                        در حال جستجو
+                                        <img src="<?php echo base_url(); ?>assets/images/load-icon2.gif">
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -194,89 +202,14 @@
                     <div class="clearfix"></div>
                 </div>
                 <!--charter result-->
-                <div class="row" id="charter-domestic-oneway-result">
-                    <div class="result-show">
-                        <form method="post" action="<?php echo base_url(); ?>index.php/charter/charter_reserve">
-                            <header id="charter-domestic-oneway-header" class="accordion"></header>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>ردیف</th>
-                                        <th>مبداء</th>
-                                        <th>مقصد</th>
-                                        <th>ایرلاین</th>
-                                        <th>شماره پرواز</th>
-                                        <th>ساعت حرکت</th>
-                                        <th>ساعت فرود</th>
-                                        <th>ظرفیت</th>
-                                        <th>کلاس قیمت</th>
-                                        <th>قیمت (تومان)</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="charter-domestic-oneway-content">
-                                </tbody>
-                            </table>
-                        </form>
-                    </div>
-                </div>
-                <div class="row" id="charter-domestic-departure-result">
-                    <div class="result-show">
-                        <header id="charter-domestic-departure-header" class="accordion"></header>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ردیف</th>
-                                    <th>مبداء</th>
-                                    <th>مقصد</th>
-                                    <th>ایرلاین</th>
-                                    <th>شماره پرواز</th>
-                                    <th>ساعت حرکت</th>
-                                    <th>ساعت فرود</th>
-                                    <th>ظرفیت</th>
-                                    <th>کلاس قیمت</th>
-                                    <th>قیمت(تومان)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="charter-domestic-departure-content">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row" id="charter-domestic-return-result">
-                    <div class="result-show">
-                        <header id="charter-domestic-return-header" class="accordion"></header>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ردیف</th>
-                                    <th>مبداء</th>
-                                    <th>مقصد</th>
-                                    <th>ایرلاین</th>
-                                    <th>شماره پرواز</th>
-                                    <th>ساعت حرکت</th>
-                                    <th>ساعت فرود</th>
-                                    <th>ظرفیت</th>
-                                    <th>کلاس قیمت</th>
-                                    <th>قیمت (تومان)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="charter-domestic-return-content">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!--liaison result-->
-                <form id="liaison-result-show-form" method="post" action="<?php echo base_url(); ?>index.php/flight/start_reserve">
-                    <div class="row" id="liaison-result-show">
+                <form id="charter-result-show-form" method="post" action="<?php echo base_url(); ?>index.php/flight/start_reserve">
+                    <div class="row" id="charter-departure-result">
                         <div class="result-show">
-                            <header id="liaison-result-header" class="accordion"></header>
+                            <header id="charter-departure-result-header" class="accordion"></header>
                             <table>
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>ردیف</th>
                                         <th>مبداء</th>
                                         <th>مقصد</th>
                                         <th>ایرلاین</th>
@@ -286,6 +219,57 @@
                                         <th>ظرفیت</th>
                                         <th>کلاس قیمت</th>
                                         <th>قیمت(تومان)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="charter-departure-result-content">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" id="charter-return-result">
+                        <div class="result-show">
+                            <header id="charter-return-result-header" class="accordion"></header>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>مبداء</th>
+                                        <th>مقصد</th>
+                                        <th>ایرلاین</th>
+                                        <th>شماره پرواز</th>
+                                        <th>ساعت حرکت</th>
+                                        <th>ساعت فرود</th>
+                                        <th>ظرفیت</th>
+                                        <th>کلاس قیمت</th>
+                                        <th>قیمت(تومان)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="charter-return-result-content">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <a href="#" class="charter-result-submit transition-effect">ادامه</a>
+                <!--liaison result-->
+                <form id="liaison-result-show-form" method="post" action="<?php echo base_url(); ?>index.php/flight/start_reserve">
+                    <div class="row" id="liaison-result-show">
+                        <div class="result-show">
+                            <header id="liaison-result-header" class="accordion"></header>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>مبداء</th>
+                                        <th>مقصد</th>
+                                        <th>ایرلاین</th>
+                                        <th>شماره پرواز</th>
+                                        <th>ساعت حرکت</th>
+                                        <th>ساعت فرود</th>
+                                        <th>ظرفیت</th>
+                                        <th>کلاس قیمت</th>
+                                        <th>قیمت کل (تومان)</th>
+                                        <th>قیمت با کمیسیون (تومان)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="liaison-result-content">
@@ -300,7 +284,6 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>ردیف</th>
                                         <th>مبداء</th>
                                         <th>مقصد</th>
                                         <th>ایرلاین</th>
@@ -309,7 +292,8 @@
                                         <th>ساعت فرود</th>
                                         <th>ظرفیت</th>
                                         <th>کلاس قیمت</th>
-                                        <th>قیمت(تومان)</th>
+                                        <th>قیمت کل (تومان)</th>
+                                        <th>قیمت با کمیسیون (تومان)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="liaison-result-content-departure">
@@ -399,7 +383,6 @@
                 </div>
             </div>
         </div>
-        <div class="loading"><img src="<?php echo base_url(); ?>/assets/images/loadbar.gif"></div>
     </body>
 </html>
 
@@ -412,7 +395,6 @@
             (('' + month).length < 2 ? '0' : '') + month + '/' +
             (('' + day).length < 2 ? '0' : '') + day;
     var current_date = (gregorian_to_jalali(output));
-
     //persian datepicker 
     $(".pdatepicker").persianDatepicker({
         startDate: current_date,
@@ -420,12 +402,8 @@
         cellHeight: 35,
         fontSize: 15
     });
-
-    //cities     
-    $('.autocomplete').autoComplete({minChars: 2,
-        source: function (term, suggest) {
-            term = term.toLowerCase();
-            var cities = [<?php
+    //cities    
+    var cities = [<?php
                                         foreach ($cities as $city) {
                                             echo "'" . $city['iata'] . " | ";
                                             echo $city['fa_name'] . " | ";
@@ -433,6 +411,9 @@
                                             echo $city['airport_name'] . "',";
                                         }
                                         ?>];
+    $('.autocomplete').autoComplete({minChars: 2,
+        source: function (term, suggest) {
+            term = term.toLowerCase();
             var suggestions = [];
             for (i = 0; i < cities.length; i++)
                 if (~cities[i].toLowerCase().indexOf(term))
@@ -440,7 +421,149 @@
             suggest(suggestions);
         }
     });
+    //google map
+    var initLat = 36.2904484265274;
+    var initLng = 59.6069342829287;
+    var initZoom = 15;
+    function initialize() {
+        var latlng = new google.maps.LatLng(initLat, initLng);
+        var myOptions = {zoom: initZoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        marker = new google.maps.Marker({position: latlng, map: map, draggable: false, scrollwheel: false});
+    }
+    window.onload = function () {
+        initialize();
+    };
+    //charter ajax
+    function search_charter() {
+        $("#liaison-result-show").hide();
+        $("#liaison-result-show-departure").hide();
+        $(".liaison-result-submit").hide();
+        var charter_from_city = $("#charter-from-city").val();
+        var charter_to_city = $("#charter-to-city").val();
+        var charter_departure_date = $("#charter-departure-date").val();
+        var charter_return_date = $("#charter-return-date").val();
+        var charter_flight_type = $("#charter-flight-type").val();
+        if (cities.indexOf(charter_from_city) === -1) {
+            $("#charter-from-city").val("");
+            $("#charter-from-city").prop("placeholder", "عدم ورود داده صحیح");
+            $("#charter-from-city").css("border-color", "red");
+        } else if (cities.indexOf(charter_to_city) === -1) {
+            $("#charter-to-city").val("");
+            $("#charter-to-city").prop("placeholder", "عدم ورود داده صحیح");
+            $("#charter-to-city").css("border-color", "red");
+        } else if (charter_departure_date === "") {
+            $("#charter-departure-date").prop("placeholder", "عدم ورود داده صحیح");
+            $("#charter-departure-date").css("border-color", "red");
+        } else if (charter_flight_type == 1 && charter_return_date === "") {
+            $("#charter-return-date").prop("placeholder", "عدم ورود داده صحیح");
+            $("#charter-return-date").css("border-color", "red");
+        } else {
+            $("#charter-submit").hide();
+            $(".searching-btn").fadeIn();
+            var p = {
+                'charter-flight-type': $('#charter-flight-type').val(),
+                'charter-from-city': $('#charter-from-city').val().split('|')[0].trim(),
+                'charter-to-city': $('#charter-to-city').val().split('|')[0].trim(),
+                'charter-departure-date': jalali_to_gregorian($('#charter-departure-date').val()),
+                'charter-return-date': jalali_to_gregorian($('#charter-return-date').val()),
+                'charter-adult': $('#charter-adult').val(),
+                'charter-child': $('#charter-child').val(),
+                'charter-infant': $('#charter-infant').val()
+            };
+            $.getJSON("<?php echo base_url(); ?>index.php/charter/show_charter_flight", p, function (result) {
+                if ($("#charter-flight-type").val() == 0) {
+                    $("#charter-submit").fadeIn();
+                    $(".searching-btn").hide();
+                    show_charter_oneway(result);
+                } else {
+                    $("#charter-submit").fadeIn();
+                    $(".searching-btn").hide();
+                    show_charter_roundtrip(result);
+                }
+            });
+        }
+    }
 
+    function show_charter_oneway(result) {
+        var flight_info = result;
+        var obj;
+        $("#charter-departure-result").fadeIn();
+        $("#charter-return-result").hide();
+        $('#charter-departure-result-content').html('');
+        $('#charter-departure-result-header').html('');
+        var charter_departure_date = $('#charter-departure-date').val();
+        var charter_from_city = $('#charter-from-city').val().split('|')[1].trim();
+        var charter_to_city = $('#charter-to-city').val().split('|')[1].trim();
+        var charter_adult = $('#charter-adult').val();
+        var charter_child = $('#charter-child').val();
+        var charter_infant = $('#charter-infant').val();
+        if (flight_info.length === 0 || flight_info.length === undefined) {
+            $('#charter-departure-result-header').append('پرواز چارتری (' + charter_from_city + ' - ' + charter_to_city + ')' + ' - ' + charter_departure_date);
+            $('#charter-departure-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+        } else {
+            $('#charter-departure-result-header').append('پرواز چارتری (' + charter_from_city + ' - ' + charter_to_city + ')' + ' - ' + charter_departure_date);
+            $(".charter-result-submit").fadeIn();
+            for (var i = 0; i < flight_info.length; i++) {
+                obj = flight_info[i];
+                $('#charter-departure-result-content').append('<tr><td><input type="hidden" name="flight-cat" value="0"><input type="hidden" name="adult" value="' + charter_adult + '"><input type="hidden" name="child" value="' + charter_child + '"><input type="hidden" name="infant" value="' + charter_infant + '"><input type="checkbox" name="flight-key[]" class="charter-departure-result" value=' + obj.id + '></td><input type="hidden" value="0" name="flight-cat"><input type="hidden" name="charter-adult" value="' + charter_adult + '"><input type="hidden" name="charter-child" value="' + charter_child + '"><input type="hidden" name="charter-infant" value="' + charter_infant + '"><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.return_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.ghimat + '</td></tr>');
+            }
+            setCheckBoxLimit("charter-departure-result");
+        }
+        $(".charter-result-submit").on("click", function () {
+            if ($(".charter-departure-result:checked").length !== 0) {
+                $("#charter-result-show-form").submit();
+            }
+        });
+    }
+    function show_charter_roundtrip(result) {
+        var departure_flight_info = result.departure_flight;
+        var departure_obj;
+        var return_flight_info = result.return_flight;
+        var return_obj;
+        $("#charter-departure-result").fadeIn();
+        $("#charter-return-result").fadeIn();
+        $('#charter-departure-result-header').html('');
+        $('#charter-departure-result-content').html('');
+        $('#charter-return-result-header').html('');
+        $('#charter-return-result-content').html('');
+        var charter_departure_date = $('#charter-departure-date').val();
+        var charter_return_date = $('#charter-return-date').val();
+        var charter_from_city = $('#charter-from-city').val().split('|')[1].trim();
+        var charter_to_city = $('#charter-to-city').val().split('|')[1].trim();
+        var charter_adult = $('#charter-adult').val();
+        var charter_child = $('#charter-child').val();
+        var charter_infant = $('#charter-infant').val();
+        if (result.departure_flight === 0 || result.departure_flight === undefined) {
+            $('#charter-departure-result-header').append('پرواز چارتری (' + charter_from_city + '-' + charter_to_city + ')' + ' - ' + charter_departure_date);
+            $('#charter-departure-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+        } else {
+            $('#charter-departure-result-header').append('پرواز چارتری (' + charter_from_city + '-' + charter_to_city + ')' + ' - ' + charter_departure_date);
+            $(".charter-result-submit").fadeIn();
+            for (var i = 0; i < departure_flight_info.length; i++) {
+                departure_obj = departure_flight_info[i];
+                $('#charter-departure-result-content').append('<tr><td><input type="hidden" name="flight-cat" value="0"><input type="hidden" name="adult" value="' + charter_adult + '"><input type="hidden" name="child" value="' + charter_child + '"><input type="hidden" name="infant" value="' + charter_infant + '"><input type="checkbox" name="flight-key" class="charter-departure-result" value=' + departure_obj.id + '><td>' + departure_obj.from_city_iata + '</td><td>' + departure_obj.to_city_iata + '</td><td>' + departure_obj.airline_iata + '</td><td>' + departure_obj.flight_number + '</td><td>' + departure_obj.departure_time + '</td><td>' + departure_obj.return_time + '</td><td>' + departure_obj.capacity + '</td><td>' + departure_obj.class + '</td><td>' + departure_obj.ghimat + '</td></tr>');
+            }
+        }
+        if (result.return_flight === 0 || result.return_flight === undefined) {
+            $('#charter-return-result-header').append('پرواز چارتری (' + charter_to_city + '-' + charter_from_city + ')' + ' - ' + charter_return_date);
+            $('#charter-return-result-content').append('<tr><th colspan="11" style="background-color:red; color:#fff !important;">نتیجه ای یافت نشد.</th></tr>');
+        } else {
+            $('#charter-return-result-header').append('پرواز چارتری (' + charter_from_city + '-' + charter_to_city + ')' + ' - ' + charter_departure_date);
+            $(".charter-result-submit").fadeIn();
+            for (var j = 0; j < return_flight_info.length; j++) {
+                return_obj = return_flight_info[j];
+                $('#charter-return-result-content').append('<tr><input type="hidden" name="flight-cat" value="0"><input type="hidden" name="adult" value="' + charter_adult + '"><input type="hidden" name="child" value="' + charter_child + '"><input type="hidden" name="infant" value="' + charter_infant + '"><td><input type="checkbox" name="flight-key" class="charter-return-result" value=' + return_obj.id + '><td>' + return_obj.from_city_iata + '</td><td>' + return_obj.to_city_iata + '</td><td>' + return_obj.airline_iata + '</td><td>' + return_obj.flight_number + '</td><td>' + return_obj.departure_time + '</td><td>' + return_obj.return_time + '</td><td>' + return_obj.capacity + '</td><td>' + return_obj.class + '</td><td>' + return_obj.ghimat + '</td></tr>');
+            }
+            setCheckBoxLimit("charter-departure-result");
+            setCheckBoxLimit("charter-return-result");
+        }
+        $(".charter-result-submit").on("click", function () {
+            if ($(".charter-departure-result:checked").length !== 0 && $(".charter-return-result:checked").length !== 0) {
+                $("#charter-result-show-form").submit();
+            }
+        });
+    }
     //liaison ajax
     function check_result_liaison(ids) {
         var p = {
@@ -451,21 +574,24 @@
             console.log('result:', result);
             if (result.result_ok !== true)
             {
+                if (result.result.length > 0)
+                {
+                    show_liaison(result);
+                }
                 setTimeout(function () {
                     check_result_liaison(ids);
                 }, 500);
             } else {
+                $("#liaison-submit").fadeIn();
+                $(".searching-btn").hide();
                 show_liaison(result);
             }
         });
     }
-
     function show_liaison(result) {
-        $('.loading').hide();
+        var liaison_show_index = 0;
         var res = result.result;
         var obj;
-        var j = 1;
-        var k = 1;
         $('#liaison-result-content').html('');
         $('#liaison-result-header').html('');
         $('#liaison-result-content-departure').html('');
@@ -497,56 +623,84 @@
                 $('#liaison-result-header-departure').append('پرواز چارتری (' + liaison_to_city + ' - ' + liaison_from_city + ')' + ' - ' + liaison_arrival_date);
             }
         } else {
-            $(".liaison-result-submit").show();
+            $(".liaison-result-submit").fadeIn();
             $('#liaison-result-header').append('پرواز سیستمی داخلی (' + liaison_from_city + ' - ' + liaison_to_city + ')' + ' - ' + liaison_departure_date);
             $('#liaison-result-header-departure').append('پرواز سیستمی داخلی (' + liaison_to_city + ' - ' + liaison_from_city + ')' + ' - ' + liaison_arrival_date);
-            for (var i = 0; i < res.length; i++) {
+            for (var i = liaison_show_index; i < res.length; i++) {
                 obj = res[i];
                 if (obj.from_city_iata == liaison_from_city_iata) {
                     $('#liaison-result-show').fadeIn();
-                    $('#liaison-result-content').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-departure-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + j + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td></tr></tr>');
-                    j++;
+                    $('#liaison-result-content').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-departure-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.unchanged_price + '</td><td>' + obj.price + '</td></tr>');
                 }
                 if (obj.from_city_iata == liaison_to_city_iata) {
                     $('#liaison-result-show-departure').fadeIn();
-                    $('#liaison-result-content-departure').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-return-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + k + '</td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.price + '</td></tr></tr>');
-                    k++;
+                    $('#liaison-result-content-departure').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-return-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.unchanged_price + '</td><td>' + obj.price + '</td></tr>');
                 }
             }
+            liaison_show_index = res.length;
             setCheckBoxLimit("liaison-departure-result");
             setCheckBoxLimit("liaison-return-result");
         }
+        $(".liaison-result-submit").on("click", function () {
+            if (liaison_flight_type == 0 && $(".liaison-departure-result:checked").length != 0) {
+                $("#liaison-result-show-form").submit();
+            }
+            if (liaison_flight_type == 1 && $(".liaison-departure-result:checked").length != 0 && $(".liaison-return-result:checked").length != 0) {
+                $("#liaison-result-show-form").submit();
+            }
+        });
     }
-
     function setCheckBoxLimit(ClassName)
     {
         $("." + ClassName).on('change', function () {
             $("." + ClassName).not(this).prop('checked', false);
         });
     }
-
     function search_liaison() {
+        $("#charter-departure-result").hide();
+        $("#charter-return-result").hide();
+        $(".charter-result-submit").hide();
         $("#amadeus-result-show").hide();
         $(".amadeus-result-submit").hide();
-        var p = {
-            "liaison-flight-type": $("#liaison-flight-type").val(),
-            "liaison-from-city": $("#liaison-from-city").val().split('|')[0],
-            "liaison-to-city": $("#liaison-to-city").val().split('|')[0],
-            "liaison-departure-date": $("#liaison-departure-date").val(),
-            "liaison-return-date": $("#liaison-return-date").val(),
-            "liaison-adult": $("#liaison-adult").val(),
-            "liaison-child": $("#liaison-child").val(),
-            "liaison-infant": $("#liaison-infant").val()
-        };
-        $('.loading').show();
-        $.getJSON("<?php echo base_url(); ?>index.php/liaison/show_liaison_flight", p, function (result) {
-            check_result_liaison(result);
-        });
+        var liaison_from_city = $("#liaison-from-city").val();
+        var liaison_to_city = $("#liaison-to-city").val();
+        var liaison_departure_date = $("#liaison-departure-date").val();
+        var liaison_return_date = $("#liaison-return-date").val();
+        var liaison_flight_type = $("#liaison-flight-type").val();
+        if (cities.indexOf(liaison_from_city) === -1) {
+            $("#liaison-from-city").val("");
+            $("#liaison-from-city").prop("placeholder", "عدم ورود داده صحیح");
+            $("#liaison-from-city").css("border-color", "red");
+        } else if (cities.indexOf(liaison_to_city) === -1) {
+            $("#liaison-to-city").val("");
+            $("#liaison-to-city").prop("placeholder", "عدم ورود داده صحیح");
+            $("#liaison-to-city").css("border-color", "red");
+        } else if (liaison_departure_date === "") {
+            $("#liaison-departure-date").prop("placeholder", "عدم ورود داده صحیح");
+            $("#liaison-departure-date").css("border-color", "red");
+        } else if (liaison_flight_type == 1 && liaison_return_date === "") {
+            $("#liaison-return-date").prop("placeholder", "عدم ورود داده صحیح");
+            $("#liaison-return-date").css("border-color", "red");
+        } else {
+            $("#liaison-submit").hide();
+            $(".searching-btn").fadeIn();
+            var p = {
+                "liaison-flight-type": $("#liaison-flight-type").val(),
+                "liaison-from-city": $("#liaison-from-city").val().split('|')[0],
+                "liaison-to-city": $("#liaison-to-city").val().split('|')[0],
+                "liaison-departure-date": $("#liaison-departure-date").val(),
+                "liaison-return-date": $("#liaison-return-date").val(),
+                "liaison-adult": $("#liaison-adult").val(),
+                "liaison-child": $("#liaison-child").val(),
+                "liaison-infant": $("#liaison-infant").val()
+            };
+            $.getJSON("<?php echo base_url(); ?>index.php/liaison/show_liaison_flight", p, function (result) {
+                check_result_liaison(result);
+            });
+        }
     }
-
     //amadeus ajax
     function show_amadeus_flight(result) {
-        $('.loading').hide();
         var flight_info = result.result;
         console.log('flight_info', flight_info);
         var obj;
@@ -574,7 +728,6 @@
             }
         }
     }
-
     function check_result_amadeus(ids) {
         var p = {
             "ids": ids
@@ -593,7 +746,6 @@
 
         });
     }
-
     function search_amadeus() {
         $("#liaison-result-show").hide();
         $("#liaison-result-show-departure").hide();
@@ -612,7 +764,6 @@
             'amadeus-infant': $('#amadeus-infant').val()
         };
         console.log('searching', p);
-        $('.loading').show();
         $.getJSON("<?php echo base_url(); ?>index.php/amadeus/search_amadeus_flight", p, function (result) {
             console.log('result:', result);
             check_result_amadeus(result);

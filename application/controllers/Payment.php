@@ -43,6 +43,11 @@ class Payment extends CI_Controller {
             $_SESSION['bank'] = 'saman';
             $_SESSION['MID'] = $MID;
             $_SESSION['BankRefrenceNumber'] = $BankRefrenceNumber;
+//            if (isset($_COOKIE['action'])) {
+//                //Refreshed
+//            } else {
+//                setcookie('action');
+//            }
             $this->flight_model->confirm_reserve($refrence_id);
             $data['out'] = array("refrence_id" => $refrence_id, "status" => TRUE);
             $this->load->view("ticket", $data);

@@ -31,7 +31,7 @@ class Liaison_model extends CI_Model {
         if (count($result) > 0) {
             $id = $result[0]['id'];
         }
-        if (count($result) > 0 && $result[0]['tdif'] > 60) {
+        if (count($result) > 0 && $result[0]['tdif'] > 0) {
             $this->db->query("delete from flight1 where from_city = '$from_city' and to_city = '$to_city' and date(fdate) = '$date'");
             $this->db->query("UPDATE source_update set stat = 2 , last_update = NOW() where id = $id" );
             $this->db->query("INSERT INTO RB_Request (request,source_id,stat) values ('A[{\"ID\":\"$id\"}]',1,0)");

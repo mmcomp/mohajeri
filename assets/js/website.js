@@ -1,29 +1,10 @@
 $(document).ready(function () {
 
-    //google map
-    var initLat = 36.2904484265274;
-    var initLng = 59.6069342829287;
-    var initZoom = 15;
-    function initialize() {
-        var latlng = new google.maps.LatLng(initLat, initLng);
-        var myOptions = {zoom: initZoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        marker = new google.maps.Marker({position: latlng, map: map, draggable: false, scrollwheel: false});
-    }
-    window.onload = function () {
-        initialize();
-    };
-
     //address
     $(".address").hide();
     $(".location-icon").on("click", function () {
         $(".address").stop().toggle("slow");
     });
-
-    //main header 
-    setTimeout(function () {
-        $(".main-header").slideDown("slow");
-    }, 1000);
 
     //set infant number
     $("#charter-adult").on("change", function () {
@@ -136,6 +117,11 @@ $(document).ready(function () {
         }
     });
 
+    //charter submit
+    $("#charter-submit").on("click", function () {
+        search_charter();
+    });
+
     //liaison submit
     $("#liaison-submit").on("click", function () {
         search_liaison();
@@ -156,21 +142,22 @@ $(document).ready(function () {
         }
     });
 
+    //searching btn
+    $(".searching-btn").hide();
+
     //result hide and show
-    $("#charter-domestic-oneway-result").hide();
-    $("#charter-domestic-departure-result").hide();
-    $("#charter-domestic-return-result").hide();
+    $("#charter-departure-result").hide();
+    $("#charter-return-result").hide();
+    $(".charter-result-submit").hide();
     $("#liaison-result-show").hide();
     $("#liaison-result-show-departure").hide();
-    $("#amadeus-result-show").hide();
     $(".liaison-result-submit").hide();
+    $("#amadeus-result-show").hide();
     $(".amadeus-result-submit").hide();
 
-    //liaison result submit
-    $(".liaison-result-submit").on("click", function () {
-        $("#liaison-result-show-form").submit();
-    });
-    
+    //pick flight error
+    $(".pick-flight-error").hide();
+
     //amadeus result submit
     $(".amadeus-result-submit").on("click", function () {
         $("#amadeus-result-show-form").submit();
@@ -178,7 +165,12 @@ $(document).ready(function () {
 
     //accordion
     $(".accordion").on("click", function () {
-        $(this).next("table").toggle();
+        $(this).next("table").toggle("slow");
+    });
+    $(".admin-charter-box header").next("form").hide();
+    $(".admin-charter-box header").on("click", function () {
+        $(this).next("form").fadeIn();
+        $(".admin-charter-box header").not(this).next("form").hide();
     });
 
     //credit form

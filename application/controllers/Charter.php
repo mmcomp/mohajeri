@@ -20,22 +20,12 @@ class Charter extends CI_Controller {
         $charter_infant = $this->input->get('charter-infant');
         $pcount = $charter_adult + $charter_child + $charter_infant;
         if ($charter_flight_type == 0) {
-            $data['out'] = $this->charter_model->get_charter_domestic_oneway($charter_from_city, $charter_to_city, $charter_departure_date, $pcount);
+            $data['out'] = $this->charter_model->get_charter_oneway($charter_from_city, $charter_to_city, $charter_departure_date, $pcount);
             $this->load->view('ajax_result', $data);
         } elseif ($charter_flight_type == 1) {
-            $data['out'] = $this->charter_model->get_charter_domestic_roundtrip($charter_from_city, $charter_to_city, $charter_departure_date, $charter_return_date, $pcount);
+            $data['out'] = $this->charter_model->get_charter_roundtrip($charter_from_city, $charter_to_city, $charter_departure_date, $charter_return_date, $pcount);
             $this->load->view('ajax_result', $data);
         }
-    }
-
-    public function charter_reserve() {
-        $flight_key = $this->input->post('flight-key');
-        $data['charter_adult'] = $this->input->post('charter-adult');
-        $data['charter_child'] = $this->input->post('charter-child');
-        $data['charter_infant'] = $this->input->post('charter-infant');
-        $data['flight_cat'] = $this->input->post['flight-cat'];
-        $data['flight_info'] = $this->charter_model->get_charter_flight($flight_key);
-        $this->load->view('reserve', $data);
     }
 
 }

@@ -10,11 +10,17 @@ class Flight_model extends CI_Model {
         $out = array();
         if ($flight_type == 1) {
             // Liaison
-            $query = $this->db->query("select from_city,to_city,price,fdate,ftime,ltime,class_ghimat,flight_number,airline from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where flight1.tflight = '$flight_id'");
+            $takhfif = $this->tax_model->getTakhfifLiaison();
+            $query = $this->db->query("select from_city,to_city,FLOOR((price - get_tax(class_ghimat,airline))*$takhfif + get_tax(class_ghimat,airline)) price,fdate,ftime,ltime,class_ghimat,flight_number,airline from flight1 left join flight_extra on (flight1.tflight=flight_extra.tflight) where flight1.tflight = '$flight_id'");
             $out = $query->result_array();
         } else if ($flight_type == 2) {
             // Amadeus
-            $query = $this->db->query("select from_city_iata from_city,to_city_iata to_city,ghimat price,fdate,departure_time ftime,landing_time ltime,class class_ghimat,flight_number,am_flight_a.airline_iata airline from am_flight_a left join class_ghimat1 on (class_ghimat1.from_city=from_city_iata and class_ghimat1.to_city = to_city_iata and  class_ghimat1.airline_iata = am_flight_a.airline_iata and am_flight_a.class like concat(class_ghimat1.name,'%')) where am_flight_a.id = $flight_id order by class_ghimat1.id desc limit 1");
+            $takhfif = $this->tax_model->getTakhfifAmadeus();
+            $query = $this->db->query("select from_city_iata from_city,to_city_iata to_city,FLOOR((ghimat)*$takhfif) price,fdate,departure_time ftime,landing_time ltime,class class_ghimat,flight_number,am_flight_a.airline_iata airline from am_flight_a left join class_ghimat1 on (class_ghimat1.from_city=from_city_iata and class_ghimat1.to_city = to_city_iata and  class_ghimat1.airline_iata = am_flight_a.airline_iata and am_flight_a.class like concat(class_ghimat1.name,'%')) where am_flight_a.id = $flight_id order by class_ghimat1.id desc limit 1");
+            $out = $query->result_array();
+        } else if ($flight_type == 3) {
+            // Charter
+            $query = $this->db->query("SELECT `ghimat` `price`,`flight_number`,`airplane_id`,`airline_iata`,`from_city_iata`,`to_city_iata`,`flight_detail`.`id`,`class`,`ghimat`,`departure_date`,`return_date`,`capacity` FROM flight LEFT JOIN flight_detail ON flight_detail.flight_id = flight.id WHERE `flight_detail`.`id` = $flight_id");
             $out = $query->result_array();
         }
         return $out;
@@ -48,6 +54,7 @@ class Flight_model extends CI_Model {
 
     function add_ticket($refrence_id, $fname, $lname, $fname_en, $lname_en, $nationality, $shomare_melli, $birthdate, $passport, $passport_expire, $passport_origin, $gender, $age, $mobile, $email) {
         $refrence_id = (int) $refrence_id;
+        $this->db->query("update tmp_reserve set last_modified = '".date("Y-m-d H:i:s")."',summery_minutes=20 where refrence_id = $refrence_id");
         $query = $this->db->query("select id from reserve_tmp where refrence_id = $refrence_id");
         $result = $query->result_array();
         foreach ($result as $res) {
@@ -77,6 +84,13 @@ class Flight_model extends CI_Model {
                 $req = 'C[{"Id":"' . $reserve_tmp . '", "FlightNo":"' . $res['flight_number'] . '", "From_City":"' . $res['from_city'] . '", "To_City":"' . $res['to_city'] . '", "PCount":"' . $res['pcount'] . '", "Date":"' . date("dM", strtotime($res['fdate'])) . '", "Airline":"' . $res['airline'] . '", "S1":"2", "S2":"4"}]';
                 //Test is 5 change into to 0 for real
                 $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
+            }
+        } elseif ($result[0]['type'] == 3) {
+            $query = $this->db->query("select reserve_tmp.id,flight_number,from_city,to_city,adl+chd pcount,fdate,airline from reserve_tmp left join flight1 on (flight1.tflight=reserve_tmp.tflight) left join flight_extra on (flight1.tflight=flight_extra.tflight) where refrence_id = $refrence_id");
+            $result = $query->result_array();
+            foreach ($result as $res) {
+                $reserve_tmp = $res['id'];
+                //Confirm Charter
             }
         }
     }

@@ -8,7 +8,9 @@ class Flight extends CI_Controller {
         parent::__construct();
         $this->load->model('liaison_model');
         $this->load->model('amadeus_model');
+        $this->load->model('charter_model');
         $this->load->model('flight_model');
+        $this->load->model('tax_model');
     }
 
     public function create_refrence() {
@@ -18,6 +20,7 @@ class Flight extends CI_Controller {
     }
 
     public function start_reserve() {
+//        var_dump($_REQUEST);
         $flights = $this->input->post('flight_key');
         $flight_types = $this->input->post('flight_cat');
         $adl = $this->input->post('adult');
@@ -53,8 +56,13 @@ class Flight extends CI_Controller {
                     $data['refrence_id'] = $refrence_id;
                     $data['reserve_tmp'][] = $reserve_tmp;
                     $data['flight_info'][] = $this->flight_model->get_flight($flight_id, $flight_types[$i]);
-                }
-            }
+                } elseif ($flight_types[$i] == 3) {
+                    //Charter
+                    $reserve_tmp = $this->charter_model->insert_reserve($adl, $chd, $inf, $flight_id, $refrence_id);
+                    $data['refrence_id'] = $refrence_id;
+                    $data['reserve_tmp'][] = $reserve_tmp;
+                    $data['flight_info'][] = $this->flight_model->get_flight($flight_id, $flight_types[$i]);
+                }            }
         }
         $flight_info = $data['flight_info'];
         $total_price = 0;
@@ -65,11 +73,6 @@ class Flight extends CI_Controller {
             $infant_price = $inf * $price * 0.1;
             $total_price += $adl_price + $child_price + $infant_price;
         }
-//        echo "REQUEST :<br/>\n";
-//        var_dump($_REQUEST);
-//        echo "DATA :<br/>\n";
-//        var_dump($data);
-//        exit();
         $this->flight_model->payment($refrence_id, $total_price);
         $this->load->view('reserve', $data);
     }

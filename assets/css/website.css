@@ -93,24 +93,32 @@ body {
 .alert-box {
     background-color: #ff4343;
     color: #fff;
-    font-size: 18px;
     text-align: center;
     padding: 20px;
     margin-top: 2%;
 }
 
 .alert-box a {
+    width: 100px;
     display: block;
     line-height: 35px;
     background-color: #43a047;
     color: #fff;
     text-decoration: none;
-    width: 100px;
     margin: 10px auto 0 auto;
 }
 
 .alert-box a:hover {
     background-color: #2e7d32;
+}
+
+.pick-flight-error {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    background-color: red;
 }
 
 @font-face {
@@ -236,7 +244,6 @@ body {
 .main-header {
     height: 100px;
     background: url(../images/main-header-bg.png);
-    display: none;
 }
 
 .mohajeri-logo {
@@ -296,6 +303,10 @@ body {
 
 .search-form input[type='text']:focus {
     border-color: #43a047;
+}
+
+.search-form input::-webkit-input-placeholder {
+    color: red;
 }
 
 .search-form select:focus {
@@ -358,9 +369,27 @@ select option {
 }
 
 .charter-result-submit {
-    background-color: transparent;
-    cursor: pointer;
-    color: #0a9400;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #0a9400;
+}
+
+.charter-result-submit:hover {
+    background-color: #2e7d32;
+}
+
+.searching-btn {
+    position: relative;
+}
+
+.searching-btn img {
+    width: 38px;
+    position: absolute;
+    padding-right: 5px;
 }
 
 .liaison-result-submit {
@@ -648,6 +677,106 @@ select option {
     z-index: 10;
 }
 
+/*======== let's begin (admin-page) ========*/
+
+.admin-bg {
+    background: url("../images/admin-bg.jpg") no-repeat fixed;
+    background-size: cover;
+}
+
+.admin-header {
+    width: 100%;
+    height: 100px;
+    background: url("../images/box-bg2.png") repeat;
+}
+
+.admin-menu {
+    margin-right: 5%;
+}
+
+.admin-menu ul {
+    height: 100px;
+    list-style: none;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.admin-menu ul li {
+    display: inline-block;
+    padding: 10px 40px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.admin-menu ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.admin-menu ul li:hover {
+    background-color: #8a3b01;
+    transition: 0.5s;
+}
+
+.admin-charter-box {
+    width: 80%;
+    margin: 5% auto;
+    background: url("../images/box-bg2.png") repeat;
+}
+
+.admin-charter-box header {
+    color: #fff;
+    padding-right: 2%;
+    background-color: #8a3b01;
+    line-height: 50px;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+}
+
+.city-record {
+    padding: 10px;
+}
+
+.admin-charter-box label {
+    color: #fff;
+}
+
+.admin-charter-box input {
+    width: 100%;
+    line-height: 35px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;
+    box-shadow: inset 0 3px 8px #d8d8d8;
+}
+
+.admin-charter-box input:focus {
+    border-color: #43a047;
+}
+
+.admin-charter-box a {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
+    background-color: #43a047;
+    margin-top: 10px;
+}
+
+.admin-charter-box a:hover {
+    background-color: #2e7d32;
+}
+
+.flight-record {
+    padding: 10px;
+}
+
+.path-record {
+    padding: 10px;
+}
+
 @media screen and (max-width: 992px) {
 
     .form-group {
@@ -693,10 +822,6 @@ select option {
         padding: 0;
     }
 
-    .result-show {
-        padding: 20px 0;
-    }
-
     .tour ul li {
         width: 30%;
         margin-top: 20px;
@@ -717,6 +842,10 @@ select option {
         width: 100%;
         padding: 0;
         margin-top: 20px;
+    }
+
+    .admin-charter-box {
+        width: 100%;
     }
 
 }
@@ -769,53 +898,57 @@ select option {
         float: right;
         text-align: right;
         padding-right: 5px;
-        width: 100px;
+        width: 160px;
     }
 
-    .result-show table td:nth-last-of-type(11):before {
+    .result-show table td:nth-last-of-type(12):before {
         content: 'انتخاب';
     }
 
-    .result-show table td:nth-last-of-type(10):before {
+    .result-show table td:nth-last-of-type(11):before {
         content: 'ردیف';
     }
 
-    .result-show table td:nth-last-of-type(9):before {
+    .result-show table td:nth-last-of-type(10):before {
         content: 'مقصد';
     }
 
-    .result-show table td:nth-last-of-type(8):before {
+    .result-show table td:nth-last-of-type(9):before {
         content: 'مبدا';
     }
 
-    .result-show table td:nth-last-of-type(7):before {
+    .result-show table td:nth-last-of-type(8):before {
         content: 'ایرلاین';
     }
 
-    .result-show table td:nth-last-of-type(6):before {
+    .result-show table td:nth-last-of-type(7):before {
         content: 'شماره پرواز';
     }
 
-    .result-show table td:nth-last-of-type(5):before {
+    .result-show table td:nth-last-of-type(6):before {
         content: 'ساعت حرکت';
     }
 
-    .result-show table td:nth-last-of-type(4):before {
+    .result-show table td:nth-last-of-type(5):before {
         content: 'ساعت فرود';
     }
 
-    .result-show table td:nth-last-of-type(3):before {
+    .result-show table td:nth-last-of-type(4):before {
         content: 'ظرفیت';
     }
 
-    .result-show table td:nth-last-of-type(2):before {
+    .result-show table td:nth-last-of-type(3):before {
         content: 'کلاس نرخی';
     }
 
-    .result-show table td:nth-last-of-type(1):before {
-        content: 'قیمت';
+    .result-show table td:nth-last-of-type(2):before {
+        content: 'قیمت کل (تومان)';
     }
-    
+
+    .result-show table td:nth-last-of-type(1):before {
+        content:'قیمت با کمیسیون (تومان)';
+    }
+
     .result-show table td {
         border-bottom: 1px solid #959595;
     }
