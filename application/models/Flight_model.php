@@ -20,7 +20,7 @@ class Flight_model extends CI_Model {
             $out = $query->result_array();
         } else if ($flight_type == 3) {
             // Charter
-            $query = $this->db->query("SELECT `ghimat` `price`,`flight_number`,`airplane_id`,`airline_iata`,`from_city_iata`,`to_city_iata`,`flight_detail`.`id`,`class`,`ghimat`,`departure_date`,`return_date`,`capacity` FROM flight LEFT JOIN flight_detail ON flight_detail.flight_id = flight.id WHERE `flight_detail`.`id` = $flight_id");
+            $query = $this->db->query("SELECT `ghimat` `price`,`flight_number`,`airplane_id`,`airline_iata`,`from_city_iata` `from_city`,`to_city_iata` `to_city`,`flight_detail`.`id`,`class` `class_ghimat`,`ghimat`,`departure_date` `fdate`,`return_date`,`capacity` FROM flight LEFT JOIN flight_detail ON flight_detail.flight_id = flight.id WHERE `flight_detail`.`id` = $flight_id");
             $out = $query->result_array();
         }
         return $out;
@@ -79,12 +79,22 @@ class Flight_model extends CI_Model {
         } elseif ($result[0]['type'] == 1) {
             $query = $this->db->query("select reserve_tmp.id,flight_number,from_city,to_city,adl+chd pcount,fdate,airline from reserve_tmp left join flight1 on (flight1.tflight=reserve_tmp.tflight) left join flight_extra on (flight1.tflight=flight_extra.tflight) where refrence_id = $refrence_id");
             $result = $query->result_array();
+            $reserve_tmp = array();
+            $flightNo = array();
+            $from_city = array();
+            $to_city = array();
+            $date = array();
+            $airline = array();
             foreach ($result as $res) {
-                $reserve_tmp = $res['id'];
-                $req = 'C[{"Id":"' . $reserve_tmp . '", "FlightNo":"' . $res['flight_number'] . '", "From_City":"' . $res['from_city'] . '", "To_City":"' . $res['to_city'] . '", "PCount":"' . $res['pcount'] . '", "Date":"' . date("dM", strtotime($res['fdate'])) . '", "Airline":"' . $res['airline'] . '", "S1":"2", "S2":"4"}]';
-                //Test is 5 change into to 0 for real
-                $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',1,0)");
+                $reserve_tmp[] = $res['id'];
+                $flightNo[] = $res['flight_number'];
+                $from_city[] = $res['from_city'];
+                $to_city[] = $res['to_city'];
+                $date[] = date("dM", strtotime($res['fdate']));
+                $airline[] = $res['airline'];
             }
+            $req = 'C[{"Id":"' . implode(',',$reserve_tmp) . '", "FlightNo":"' . implode(',',$flightNo) . '", "From_City":"' . implode(',',$from_city) . '", "To_City":"' . implode(',',$to_city) . '", "PCount":"' . $res['pcount'] . '", "Date":"' . implode(',',$date) . '", "Airline":"' . implode(',',$airline) . '", "S1":"2", "S2":"4"}]';
+            $this->db->query("insert into RB_Request (`request`, `source_id`, `stat`) values ('$req',5,0)");
         } elseif ($result[0]['type'] == 3) {
             $query = $this->db->query("select reserve_tmp.id,flight_number,from_city,to_city,adl+chd pcount,fdate,airline from reserve_tmp left join flight1 on (flight1.tflight=reserve_tmp.tflight) left join flight_extra on (flight1.tflight=flight_extra.tflight) where refrence_id = $refrence_id");
             $result = $query->result_array();

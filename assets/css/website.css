@@ -901,55 +901,131 @@ select option {
         width: 160px;
     }
 
-    .result-show table td:nth-last-of-type(12):before {
+    #liaison-result-show-form table td:nth-last-of-type(11):before {
         content: 'انتخاب';
     }
 
-    .result-show table td:nth-last-of-type(11):before {
-        content: 'ردیف';
-    }
-
-    .result-show table td:nth-last-of-type(10):before {
-        content: 'مقصد';
-    }
-
-    .result-show table td:nth-last-of-type(9):before {
+    #liaison-result-show-form table td:nth-last-of-type(10):before {
         content: 'مبدا';
     }
 
-    .result-show table td:nth-last-of-type(8):before {
+    #liaison-result-show-form table td:nth-last-of-type(9):before {
+        content: 'مقصد';
+    }
+
+    #liaison-result-show-form table td:nth-last-of-type(8):before {
         content: 'ایرلاین';
     }
 
-    .result-show table td:nth-last-of-type(7):before {
+    #liaison-result-show-form table td:nth-last-of-type(7):before {
         content: 'شماره پرواز';
     }
 
-    .result-show table td:nth-last-of-type(6):before {
+    #liaison-result-show-form table td:nth-last-of-type(6):before {
         content: 'ساعت حرکت';
     }
 
-    .result-show table td:nth-last-of-type(5):before {
+    #liaison-result-show-form table td:nth-last-of-type(5):before {
         content: 'ساعت فرود';
     }
 
-    .result-show table td:nth-last-of-type(4):before {
+    #liaison-result-show-form table td:nth-last-of-type(4):before {
         content: 'ظرفیت';
     }
 
-    .result-show table td:nth-last-of-type(3):before {
+    #liaison-result-show-form table td:nth-last-of-type(3):before {
         content: 'کلاس نرخی';
     }
 
-    .result-show table td:nth-last-of-type(2):before {
+    #liaison-result-show-form table td:nth-last-of-type(2):before {
         content: 'قیمت کل (تومان)';
     }
 
-    .result-show table td:nth-last-of-type(1):before {
+    #liaison-result-show-form table td:nth-last-of-type(1):before {
         content:'قیمت با کمیسیون (تومان)';
     }
 
-    .result-show table td {
+    #liaison-result-show-form table td {
+        border-bottom: 1px solid #959595;
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(10):before {
+        content: 'انتخاب';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(9):before {
+        content: 'مبدا';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(8):before {
+        content: 'مقصد';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(7):before {
+        content: 'ایرلاین';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(6):before {
+        content: 'شماره پرواز';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(5):before {
+        content: 'ساعت حرکت';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(4):before {
+        content: 'ساعت فرود';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(3):before {
+        content: 'ظرفیت';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(2):before {
+        content: 'کلاس نرخی';
+    }
+
+    #charter-result-show-form table td:nth-last-of-type(1):before {
+        content: 'قیمت کل (تومان)';
+    }
+
+    #charter-result-show-form table td {
+        border-bottom: 1px solid #959595;
+    }
+    
+    #amadeus-result-show-form table td:nth-last-of-type(8):before {
+        content: 'مبدا';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(7):before {
+        content: 'مقصد';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(6):before {
+        content: 'ایرلاین';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(5):before {
+        content: 'شماره پرواز';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(4):before {
+        content: 'ساعت حرکت';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(3):before {
+        content: 'ساعت فرود';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(2):before {
+        content: 'ظرفیت';
+    }
+
+    #amadeus-result-show-form table td:nth-last-of-type(1):before {
+        content: 'کلاس نرخی';
+    }
+
+    #amadeus-result-show-form table td {
         border-bottom: 1px solid #959595;
     }
 

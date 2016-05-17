@@ -21,6 +21,7 @@ class Flight extends CI_Controller {
 
     public function start_reserve() {
 //        var_dump($_REQUEST);
+//        exit();
         $flights = $this->input->post('flight_key');
         $flight_types = $this->input->post('flight_cat');
         $adl = $this->input->post('adult');

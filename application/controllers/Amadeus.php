@@ -41,7 +41,9 @@ class Amadeus extends CI_Controller {
             $out['result_ok'] = $result_ok;
             if ($result_ok) {
                 $takhfif = $this->tax_model->getTakhfifAmadeus();
-                $query = $this->db->query("SELECT `flight_number`, `airplane_id`, `fdate`, `departure_time`, `landing_time`, `am_flight_a`.`airline_iata`, `from_city_iata`, `to_city_iata`, `class`, `stop_id`, `Rd_Id`,FLOOR((ghimat)*$takhfif) `ghimat`,`ghimat` `unchanged_ghimat` FROM am_flight_a left join class_ghimat1 on (class_ghimat1.from_city=from_city_iata and class_ghimat1.to_city = to_city_iata and  class_ghimat1.airline_iata = am_flight_a.airline_iata and am_flight_a.class like concat(class_ghimat1.name,'%'))  WHERE   Rd_Id IN (" . implode(',', $s_ids) . ") order by Rd_Id");
+//                echo "SELECT `flight_number`, `airplane_id`, `fdate`, `departure_time`, `landing_time`, `am_flight_a`.`airline_iata`, `from_city_iata`, `to_city_iata`, `class`, `stop_id`, `Rd_Id`,FLOOR((ghimat)*$takhfif) `ghimat`,`ghimat` `unchanged_ghimat` FROM am_flight_a left join class_ghimat1 on (class_ghimat1.from_city=from_city_iata and class_ghimat1.to_city = to_city_iata and  class_ghimat1.airline_iata = am_flight_a.airline_iata and am_flight_a.class like concat(class_ghimat1.name,'%'))  WHERE   Rd_Id IN (" . implode(',', $s_ids) . ") order by Rd_Id <br/>\n";
+//                echo "SELECT `flight_number`, `airplane_id`, `fdate`, `departure_time`, `landing_time`, `am_flight_a`.`airline_iata`, `from_city_iata`, `to_city_iata`, `class`, `stop_id`, `Rd_Id`,FLOOR((`price`)*$takhfif) `ghimat`,`ghimat` `unchanged_ghimat` FROM am_flight_a   WHERE   Rd_Id IN (" . implode(',', $s_ids) . ") order by Rd_Id<br/>\n";
+                $query = $this->db->query("SELECT `flight_number`, `airplane_id`, `fdate`, `departure_time`, `landing_time`, `am_flight_a`.`airline_iata`, `from_city_iata`, `to_city_iata`, `class`, `stop_id`, `Rd_Id`,FLOOR((`price`)*$takhfif) `ghimat`,`price` `unchanged_ghimat` FROM am_flight_a   WHERE   Rd_Id IN (" . implode(',', $s_ids) . ") order by Rd_Id");
                 $out['result'] = $query->result_array();
             }
         }

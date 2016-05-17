@@ -144,6 +144,9 @@ $(document).ready(function () {
 
     //searching btn
     $(".searching-btn").hide();
+    
+    //amadeus price
+    $(".amadeus-price").hide();
 
     //result hide and show
     $("#charter-departure-result").hide();
