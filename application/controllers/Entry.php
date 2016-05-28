@@ -8,6 +8,7 @@ class Entry extends CI_Controller {
         parent::__construct();
         $this->load->model('city_model');
         $_SESSION['refrence_id'] = NULL;
+        $_SESSION['user_id'] = NULL;
     }
 
     public function index() {
@@ -42,9 +43,12 @@ class Entry extends CI_Controller {
     public function ctrl_captcha_public_entry() {
         if (isset($_POST['captcha']) && $_SESSION['captcha'] == $_POST['captcha']) {
             $data['cities'] = $this->city_model->load_city();
+            $data['tmp'] = 0;
+            $data['is_admin'] = FALSE;
             $this->load->view('result', $data);
         } else {
-            $this->load->view('entry');
+            $data["error"] = "کد امنیتی اشتباه است";
+            $this->load->view('entry',$data);
         }
     }
 

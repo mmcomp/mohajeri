@@ -16,6 +16,7 @@ html {
 
 body {
     height: 100%;
+    position: relative;
 }
 
 .transition-effect {
@@ -703,7 +704,7 @@ select option {
 
 .admin-menu ul li {
     display: inline-block;
-    padding: 10px 40px;
+    padding: 10px 25px;
     color: #fff;
     cursor: pointer;
     transition: 0.5s;
@@ -734,6 +735,10 @@ select option {
     border-bottom: 1px solid #fff;
 }
 
+.country-record {
+    padding: 10px;
+}
+
 .city-record {
     padding: 10px;
 }
@@ -742,7 +747,7 @@ select option {
     color: #fff;
 }
 
-.admin-charter-box input {
+.admin-charter-box input[type="text"] {
     width: 100%;
     line-height: 35px;
     border: 1px solid #a7a7a7;
@@ -751,6 +756,18 @@ select option {
 }
 
 .admin-charter-box input:focus {
+    border-color: #43a047;
+}
+
+.admin-charter-box select {
+    width: 100%;
+    line-height: 35px;
+    border: 1px solid #a7a7a7;
+    padding: 0 10px;
+    box-shadow: inset 0 3px 8px #d8d8d8;
+}
+
+.admin-charter-box select:focus {
     border-color: #43a047;
 }
 
@@ -775,6 +792,49 @@ select option {
 
 .path-record {
     padding: 10px;
+}
+
+.admin-tbl-box {
+    height: 200px;
+    padding: 0 2%;
+    overflow-y: auto;
+}
+
+.admin-tbl {
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+}
+
+.admin-tbl th {
+    text-align: center;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.admin-tbl a {
+    margin-top: 0 !important;
+}
+
+.admin-tbl td {
+    text-align: center;
+    color: #fff;
+}
+
+.admin-entry {
+    width: 300px;
+    height: 35px;
+    text-align: center;
+    background-color: darkblue;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+
+.admin-entry a {
+    color: #fff;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 992px) {
@@ -992,7 +1052,7 @@ select option {
     #charter-result-show-form table td {
         border-bottom: 1px solid #959595;
     }
-    
+
     #amadeus-result-show-form table td:nth-last-of-type(8):before {
         content: 'مبدا';
     }

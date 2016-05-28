@@ -270,7 +270,10 @@
             </div>
             <div class="row">
                 <div class="payment">
-                    <header>پس از اطمینان از صحت اطلاعات وارد شده، با کلیک بر روی درگاه مربوطه نسبت به خرید بلیط خود اقدام فرمایید. و یا بصورت <a href="#" class="credit-payment">پرداخت اعتباری</a> بلیط را تهیه فرمایید. </header>
+                    <!--<header>پس از اطمینان از صحت اطلاعات وارد شده، با کلیک بر روی درگاه مربوطه نسبت به خرید بلیط خود اقدام فرمایید. و یا بصورت <a href="#" class="credit-payment">پرداخت اعتباری</a> بلیط را تهیه فرمایید. </header>-->
+                    <header>
+                        پس از اطمینان از صحت اطلاعات وارد شده، با کلیک بر روی درگاه مربوطه نسبت به خرید بلیط خود اقدام فرمایید.
+                    </header>
                     <form class="payment-bank" action="<?php echo base_url(); ?>index.php/flight/confirm_etebari_result">
                         <input type="hidden" name="refrence_id" value="<?php echo $refrence_id; ?>">
                         <ul>

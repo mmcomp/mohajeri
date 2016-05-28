@@ -15,12 +15,15 @@
         <link href="<?php echo base_url(); ?>assets/css/persian-datepicker.css" rel="stylesheet">
     </head>
     <body>
+        <?php if($is_admin) { ?>
+        <div class="admin-entry"><a target="_blank" href="<?php echo base_url(); ?>index.php/admin">ورود به پنل ادمین</a></div>
+        <?php } ?>
         <div class="container-fluid">
             <div class="image-cover">
                 <div class="row">
                     <div class="main-header-box">
                         <div class="main-header">
-                            <a href="#"><img title="آژانس مهاجری" alt="آژانس مهاجری" class="mohajeri-logo" src="<?php echo base_url(); ?>assets/images/mohajeri-logo.png"></a>
+                            <a href="<?php echo base_url(); ?>index.php/admin"><img title="آژانس مهاجری" alt="آژانس مهاجری" class="mohajeri-logo" src="<?php echo base_url(); ?>assets/images/mohajeri-logo.png"></a>
                         </div>
                     </div>
                     <div class="search-box">
@@ -629,11 +632,11 @@
                 obj = res[i];
                 if (obj.from_city_iata == liaison_from_city_iata) {
                     $('#liaison-result-show').fadeIn();
-                    $('#liaison-result-content').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-departure-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.unchanged_price.formatMoney(0,'',',','') + '</td><td>' + obj.price.formatMoney(0,'',',','') + '</td></tr>');
+                    $('#liaison-result-content').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-departure-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + parseInt(obj.unchanged_price,10).formatMoney(0,'',',','') + '</td><td>' + parseInt(obj.price,10).formatMoney(0,'',',','') + '</td></tr>');
                 }
                 if (obj.from_city_iata == liaison_to_city_iata) {
                     $('#liaison-result-show-departure').fadeIn();
-                    $('#liaison-result-content-departure').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-return-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + obj.unchanged_price.formatMoney(0,'',',','') + '</td><td>' + obj.price.formatMoney(0,'',',','') + '</td></tr>');
+                    $('#liaison-result-content-departure').append('<tr><td><input type="checkbox" name="flight_key[]" class="liaison-return-result" value=' + obj.id + '><input type="hidden" name="flight_cat[]" value="1"><input type="hidden" name="adult" value="' + liaison_adult + '"><input type="hidden" name="child" value="' + liaison_child + '"><input type="hidden" name="infant" value="' + liaison_infant + '"></td><td>' + obj.from_city_iata + '</td><td>' + obj.to_city_iata + '</td><td>' + obj.airline_iata + '</td><td>' + obj.flight_number + '</td><td>' + obj.departure_time + '</td><td>' + obj.landing_time + '</td><td>' + obj.capacity + '</td><td>' + obj.class + '</td><td>' + parseInt(obj.unchanged_price,10).formatMoney(0,'',',','') + '</td><td>' + parseInt(obj.price,10).formatMoney(0,'',',','') + '</td></tr>');
                 }
             }
             liaison_show_index = res.length;

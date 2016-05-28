@@ -1,5 +1,9 @@
 $(document).ready(function () {
-
+    
+    //member login
+    $("#member-login-btn").on("click", function () {
+        $("#member-login").submit();
+    });
     //address
     $(".address").hide();
     $(".location-icon").on("click", function () {
@@ -144,7 +148,7 @@ $(document).ready(function () {
 
     //searching btn
     $(".searching-btn").hide();
-    
+
     //amadeus price
     $(".amadeus-price").hide();
 
@@ -172,6 +176,7 @@ $(document).ready(function () {
     });
     $(".admin-charter-box header").next("form").hide();
     $(".admin-charter-box header").on("click", function () {
+        $(".masir-sh").hide();
         $(this).next("form").fadeIn();
         $(".admin-charter-box header").not(this).next("form").hide();
     });
@@ -183,6 +188,27 @@ $(document).ready(function () {
     $(".credit-payment").on("click", function () {
         $(".page-color").fadeIn();
         $(".credit-form").fadeIn();
+    });
+
+    //admin
+    $(".add-country").on("click", function () {
+        $(".country-record").submit();
+    });
+
+    $(".add-city").on("click", function () {
+        $(".city-record").submit();
+    });
+
+    $(".add-iata").on("click", function () {
+        $(".iata-record").submit();
+    });
+    
+    $(".add-flight").on("click", function (){
+       $(".flight-record").submit(); 
+    });
+    
+    $(".add-masir").on("click", function (){
+       $(".masir-record").submit(); 
     });
 
 });

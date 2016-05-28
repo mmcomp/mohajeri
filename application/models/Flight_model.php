@@ -149,4 +149,13 @@ class Flight_model extends CI_Model {
         }
     }
 
+    public function load_flight(){
+        $query = $this->db->query("SELECT * FROM flight");
+        return $query->result_array();
+    }
+    
+    public function add_flight($flight_number,$departure_time,$return_time,$airline_iata,$from_city_iata,$to_city_iata) {
+        $this->db->query("INSERT INTO flight (`flight_number`, `departure_time`, `return_time`, `airline_iata`, `from_city_iata`, `to_city_iata`) values ('$flight_number','$departure_time','$return_time','$airline_iata','$from_city_iata','$to_city_iata')");
+        return $this->db->insert_id();
+    }
 }

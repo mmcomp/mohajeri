@@ -17,14 +17,14 @@
                     <header>
                         ورود به سامانه
                     </header>
-                    <form method="post" action="" id="member-login">
+                    <form method="post" action="<?php echo base_url(); ?>index.php/admin/auth" id="member-login">
                         <div class="form-group">
                             <label>نام کاربری</label>
                             <input type="text" name="username" placeholder="نام کاربری خود را وارد نمایید">
                         </div>
                         <div class="form-group">
                             <label>رمز عبور</label>
-                            <input type="text" name="username" placeholder="رمز عبور خود را وارد نمایید">
+                            <input type="text" name="password" placeholder="رمز عبور خود را وارد نمایید">
                         </div>
                         <div class="form-group">
                             <label>کد امنیتی : </label>
@@ -65,6 +65,14 @@
                             نشانی : مشهد ، خیابان خسروی ، نرسیده به چهارراه خسروی ، جنب هتل سخاوت
                         </div>
                     </form>
+                    <div style="text-align: center;color: #560D0D;background-color: #ffffff;">
+                        <?php
+                            if(isset($error) && $error!='')
+                            {
+                                echo $error;
+                            }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

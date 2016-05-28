@@ -12,8 +12,8 @@ class Amadeus extends CI_Controller {
     public function search_amadeus_flight() {
         $amadeus_from_city = $this->input->get('amadeus-from-city');
         $amadeus_to_city = $this->input->get('amadeus-to-city');
-        $amadeus_departure_date = date("dM",  strtotime($this->input->get('amadeus-departure-date')));
-        $amadeus_return_date = date("dM",  strtotime($this->input->get('amadeus-return-date')));
+        $amadeus_departure_date = date("Y-m-d",  strtotime($this->input->get('amadeus-departure-date')));//date("dM",  strtotime($this->input->get('amadeus-departure-date')));
+        $amadeus_return_date = date("Y-m-d",  strtotime($this->input->get('amadeus-return-date')));//date("dM",  strtotime($this->input->get('amadeus-return-date')));
         $amadeus_adult = $this->input->get('amadeus-adult');
         $amadeus_child = $this->input->get('amadeus-child');
         $amadeus_infant = $this->input->get('amadeus-infant');
@@ -27,8 +27,10 @@ class Amadeus extends CI_Controller {
             "result" => array()
         );
         $g = $_REQUEST['ids'];
-        $rd_ids = array($g[0]["id"],$g[1]["id"]);
-        $s_ids = array($g[0]["sid"],$g[1]["sid"]);
+//        $rd_ids = array($g[0]["id"],$g[1]["id"]);
+//        $s_ids = array($g[0]["sid"],$g[1]["sid"]);
+        $rd_ids = array($g[0]["id"]);
+        $s_ids = array($g[0]["sid"]);
         if (is_array($rd_ids)) {
             $query = $this->db->query("SELECT stat FROM RB_Request WHERE id IN (" . implode(',', $rd_ids) . ") ");
             $id_result = $query->result_array();
